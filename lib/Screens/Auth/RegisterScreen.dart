@@ -9,6 +9,7 @@ import 'package:muddypawsuser/Api.path.dart';
 import '../../Custom/CustomButton.dart';
 import '../../Custom/CustomTextFormField.dart';
 import '../FindPets.dart';
+import 'LoginScreen.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -41,7 +42,7 @@ class _RegisterState extends State<Register> {
       var result = await response.stream.bytesToString();
       var finalResult = jsonDecode(result);
       Fluttertoast.showToast(msg: "Register Successfull");
-      Navigator.push(context, MaterialPageRoute(builder: (context) => FindPetStuff()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
     }
     else {
       print(response.reasonPhrase);

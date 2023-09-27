@@ -5,11 +5,15 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:muddypawsuser/Api.path.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../Colors.dart';
 import '../BottomNavigationScreens/PetCareScreen.dart';
 import '../BottomNavigationScreens/StoreScreen.dart';
 import '../FindPets.dart';
 
+
+
+String? user_name;
 class VerifyScreen extends StatefulWidget {
   final OTP;
   final MOBILE;
@@ -20,7 +24,10 @@ class VerifyScreen extends StatefulWidget {
 }
 
 class _VerifyScreenState extends State<VerifyScreen> {
+
+  var verifie;
   verifyOtp() async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
     var headers = {
       'Cookie': 'ci_session=64ad8ba0caf5389a6543a8aef4b3241e6dd75f57'
     };
@@ -36,8 +43,22 @@ class _VerifyScreenState extends State<VerifyScreen> {
     if (response.statusCode == 200) {
       var finalResponse = await response.stream.bytesToString();
       final jsonresponse = json.decode(finalResponse);
-      Fluttertoast.showToast(msg: '${jsonresponse['message']}');
-      Navigator.push(context, MaterialPageRoute(builder: (context) => FindPetStuff()));
+      String? user_id = jsonresponse['data'][0]['id'];
+      preferences.setString("user_id", user_id ?? "");
+      user_name = jsonresponse['data'][0]['username'];
+      preferences.setString('user_name', user_name ?? "");
+      print("userr nameee iss ${user_name}");
+      print("Userrrr Id Is ${user_id.toString()}");
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>  FindPetStuff()));
+      // if(widget.OTP == verifie){
+      //   Fluttertoast.showToast(msg: '${jsonresponse['message']}');
+      //   Navigator.push(context, MaterialPageRoute(builder: (context) =>  FindPetStuff()));
+      // }
+      // else{
+      //   Fluttertoast.showToast(msg: 'Enter correct otp');
+      // }
+      // Fluttertoast.showToast(msg: '${jsonresponse['message']}');
+      // Navigator.push(context, MaterialPageRoute(builder: (context) => FindPetStuff()));
     }
     else {
       print(response.reasonPhrase);

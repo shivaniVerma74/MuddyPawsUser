@@ -1,40 +1,40 @@
 /// error : false
-/// message : "Doctor Retrive Success"
-/// data : [{"id":"107","ip_address":"49.43.2.82","category_id":null,"company_name":null,"company_division":null,"designation_id":null,"title":"Dr.","gender":"Female","username":"Shivani Pandey","password":"$2y$10$.OYZZsBaSv/HfBLy49tAJews68ACPeq4BTmp3zS1fkDktKLsrfEZq","email":"shivani.alphawizz@mailinator.com","mobile":"8899665588","image":"https://developmentalphawizz.com/dr_vet_app/uploads/user_image/download_(1).png","balance":"0","activation_selector":"774d17adb10c7a8d140f","activation_code":"$2y$10$OUszjYapdeGEdoLc6HPBnuMoq1M7oxW0BBNvRBdTGj1GQTChwlzV.","forgotten_password_selector":null,"forgotten_password_code":null,"forgotten_password_time":null,"remember_selector":null,"remember_code":null,"created_on":"1693292911","last_login":"1693465044","active":"1","company":null,"address":"medanta vijay nagar","c_address":null,"doc_digree":"Bachelor of Veterinary Science (BVSc)","bonus_type":"percentage_per_order","bonus":null,"cash_received":"0.00","dob":null,"country_code":null,"otp":null,"roll":"1","city":null,"area":null,"street":null,"pincode":null,"serviceable_zipcodes":null,"apikey":null,"referral_code":null,"friends_code":null,"fcm_id":null,"device_token":null,"latitude":"24.530727","longitude":"81.299110","created_at":"2023-08-29 12:38:31","state_id":"9","city_id":"220","service_type":"1","area_id":null,"experience":"5 Year","consultancy_fees":"400","open_time":null,"close_time":null,"clinic_address":"vijay nagar","user_id":"734","slug":null,"category_ids":"167","cat_type":null,"store_name":null,"store_description":null,"logo":"","store_url":null,"no_of_ratings":"0","rating":"0.00","bank_name":null,"bank_code":null,"account_name":null,"account_number":null,"national_identity_card":null,"address_proof":"","pan_number":null,"tax_name":null,"tax_number":null,"permissions":null,"commission":"0.00","status":"0","date_added":"2023-08-29 12:38:31","seller_id":"734","kilometers":"0"}]
+/// message : "User Data Retrive Success"
+/// data : [{"id":"572","ip_address":"122.170.200.23","category_id":null,"company_name":null,"company_division":null,"designation_id":null,"title":null,"gender":null,"username":"dev","password":"$2y$10$p1YPNR2wBU6A0Pgrg.W0.Ot/J2T1yy8kVDIUstICQXDwGJ0XULDRO","email":"dev@gmail.com","mobile":"8349922853","image":"download_(1).png","balance":"0","activation_selector":"f145df975abdfb4e9852","activation_code":"$2y$10$v8.lB71j9cHSpV/IWjtY2.jv8d.Yu88K1NcDZiEBMtXmt/HNUMwH.","forgotten_password_selector":null,"forgotten_password_code":null,"forgotten_password_time":null,"remember_selector":null,"remember_code":null,"created_on":"1695040170","last_login":null,"active":"1","company":null,"address":null,"c_address":null,"doc_digree":null,"bonus_type":"percentage_per_order","bonus":null,"cash_received":"0.00","dob":null,"country_code":"91","otp":null,"roll":null,"city":null,"area":null,"street":null,"pincode":null,"serviceable_zipcodes":null,"apikey":null,"referral_code":null,"friends_code":null,"fcm_id":null,"device_token":null,"latitude":null,"longitude":null,"created_at":"2023-09-18 17:59:30","state_id":null,"city_id":null,"service_type":null,"area_id":null,"experience":null,"consultancy_fees":null,"open_time":null,"close_time":null,"clinic_address":null,"user_id":"733","group_id":"2"}]
 
-class GetDoctorModel {
-  GetDoctorModel({
+class GetUserDataModel {
+  GetUserDataModel({
       bool? error, 
       String? message, 
-      List<Dactordata>? data,}){
+      List<Data>? data,}){
     _error = error;
     _message = message;
     _data = data;
 }
 
-  GetDoctorModel.fromJson(dynamic json) {
+  GetUserDataModel.fromJson(dynamic json) {
     _error = json['error'];
     _message = json['message'];
     if (json['data'] != null) {
       _data = [];
       json['data'].forEach((v) {
-        _data?.add(Dactordata.fromJson(v));
+        _data?.add(Data.fromJson(v));
       });
     }
   }
   bool? _error;
   String? _message;
-  List<Dactordata>? _data;
-GetDoctorModel copyWith({  bool? error,
+  List<Data>? _data;
+GetUserDataModel copyWith({  bool? error,
   String? message,
-  List<Dactordata>? data,
-}) => GetDoctorModel(  error: error ?? _error,
+  List<Data>? data,
+}) => GetUserDataModel(  error: error ?? _error,
   message: message ?? _message,
   data: data ?? _data,
 );
   bool? get error => _error;
   String? get message => _message;
-  List<Dactordata>? get data => _data;
+  List<Data>? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -48,41 +48,41 @@ GetDoctorModel copyWith({  bool? error,
 
 }
 
-/// id : "107"
-/// ip_address : "49.43.2.82"
+/// id : "572"
+/// ip_address : "122.170.200.23"
 /// category_id : null
 /// company_name : null
 /// company_division : null
 /// designation_id : null
-/// title : "Dr."
-/// gender : "Female"
-/// username : "Shivani Pandey"
-/// password : "$2y$10$.OYZZsBaSv/HfBLy49tAJews68ACPeq4BTmp3zS1fkDktKLsrfEZq"
-/// email : "shivani.alphawizz@mailinator.com"
-/// mobile : "8899665588"
-/// image : "https://developmentalphawizz.com/dr_vet_app/uploads/user_image/download_(1).png"
+/// title : null
+/// gender : null
+/// username : "dev"
+/// password : "$2y$10$p1YPNR2wBU6A0Pgrg.W0.Ot/J2T1yy8kVDIUstICQXDwGJ0XULDRO"
+/// email : "dev@gmail.com"
+/// mobile : "8349922853"
+/// image : "download_(1).png"
 /// balance : "0"
-/// activation_selector : "774d17adb10c7a8d140f"
-/// activation_code : "$2y$10$OUszjYapdeGEdoLc6HPBnuMoq1M7oxW0BBNvRBdTGj1GQTChwlzV."
+/// activation_selector : "f145df975abdfb4e9852"
+/// activation_code : "$2y$10$v8.lB71j9cHSpV/IWjtY2.jv8d.Yu88K1NcDZiEBMtXmt/HNUMwH."
 /// forgotten_password_selector : null
 /// forgotten_password_code : null
 /// forgotten_password_time : null
 /// remember_selector : null
 /// remember_code : null
-/// created_on : "1693292911"
-/// last_login : "1693465044"
+/// created_on : "1695040170"
+/// last_login : null
 /// active : "1"
 /// company : null
-/// address : "medanta vijay nagar"
+/// address : null
 /// c_address : null
-/// doc_digree : "Bachelor of Veterinary Science (BVSc)"
+/// doc_digree : null
 /// bonus_type : "percentage_per_order"
 /// bonus : null
 /// cash_received : "0.00"
 /// dob : null
-/// country_code : null
+/// country_code : "91"
 /// otp : null
-/// roll : "1"
+/// roll : null
 /// city : null
 /// area : null
 /// street : null
@@ -93,54 +93,31 @@ GetDoctorModel copyWith({  bool? error,
 /// friends_code : null
 /// fcm_id : null
 /// device_token : null
-/// latitude : "24.530727"
-/// longitude : "81.299110"
-/// created_at : "2023-08-29 12:38:31"
-/// state_id : "9"
-/// city_id : "220"
-/// service_type : "1"
+/// latitude : null
+/// longitude : null
+/// created_at : "2023-09-18 17:59:30"
+/// state_id : null
+/// city_id : null
+/// service_type : null
 /// area_id : null
-/// experience : "5 Year"
-/// consultancy_fees : "400"
+/// experience : null
+/// consultancy_fees : null
 /// open_time : null
 /// close_time : null
-/// clinic_address : "vijay nagar"
-/// user_id : "734"
-/// slug : null
-/// category_ids : "167"
-/// cat_type : null
-/// store_name : null
-/// store_description : null
-/// logo : ""
-/// store_url : null
-/// no_of_ratings : "0"
-/// rating : "0.00"
-/// bank_name : null
-/// bank_code : null
-/// account_name : null
-/// account_number : null
-/// national_identity_card : null
-/// address_proof : ""
-/// pan_number : null
-/// tax_name : null
-/// tax_number : null
-/// permissions : null
-/// commission : "0.00"
-/// status : "0"
-/// date_added : "2023-08-29 12:38:31"
-/// seller_id : "734"
-/// kilometers : "0"
+/// clinic_address : null
+/// user_id : "733"
+/// group_id : "2"
 
-class Dactordata {
-  Dactordata({
+class Data {
+  Data({
       String? id, 
       String? ipAddress, 
       dynamic categoryId, 
       dynamic companyName, 
       dynamic companyDivision, 
       dynamic designationId, 
-      String? title, 
-      String? gender, 
+      dynamic title, 
+      dynamic gender, 
       String? username, 
       String? password, 
       String? email, 
@@ -155,19 +132,19 @@ class Dactordata {
       dynamic rememberSelector, 
       dynamic rememberCode, 
       String? createdOn, 
-      String? lastLogin, 
+      dynamic lastLogin, 
       String? active, 
       dynamic company, 
-      String? address, 
+      dynamic address, 
       dynamic cAddress, 
-      String? docDigree, 
+      dynamic docDigree, 
       String? bonusType, 
       dynamic bonus, 
       String? cashReceived, 
       dynamic dob, 
-      dynamic countryCode, 
+      String? countryCode, 
       dynamic otp, 
-      String? roll, 
+      dynamic roll, 
       dynamic city, 
       dynamic area, 
       dynamic street, 
@@ -178,43 +155,20 @@ class Dactordata {
       dynamic friendsCode, 
       dynamic fcmId, 
       dynamic deviceToken, 
-      String? latitude, 
-      String? longitude, 
+      dynamic latitude, 
+      dynamic longitude, 
       String? createdAt, 
-      String? stateId, 
-      String? cityId, 
-      String? serviceType, 
+      dynamic stateId, 
+      dynamic cityId, 
+      dynamic serviceType, 
       dynamic areaId, 
-      String? experience, 
-      String? consultancyFees, 
+      dynamic experience, 
+      dynamic consultancyFees, 
       dynamic openTime, 
       dynamic closeTime, 
-      String? clinicAddress, 
+      dynamic clinicAddress, 
       String? userId, 
-      dynamic slug, 
-      String? categoryIds, 
-      dynamic catType, 
-      dynamic storeName, 
-      dynamic storeDescription, 
-      String? logo, 
-      dynamic storeUrl, 
-      String? noOfRatings, 
-      String? rating, 
-      dynamic bankName, 
-      dynamic bankCode, 
-      dynamic accountName, 
-      dynamic accountNumber, 
-      dynamic nationalIdentityCard, 
-      String? addressProof, 
-      dynamic panNumber, 
-      dynamic taxName, 
-      dynamic taxNumber, 
-      dynamic permissions, 
-      String? commission, 
-      String? status, 
-      String? dateAdded, 
-      String? sellerId, 
-      String? kilometers,}){
+      String? groupId,}){
     _id = id;
     _ipAddress = ipAddress;
     _categoryId = categoryId;
@@ -273,33 +227,10 @@ class Dactordata {
     _closeTime = closeTime;
     _clinicAddress = clinicAddress;
     _userId = userId;
-    _slug = slug;
-    _categoryIds = categoryIds;
-    _catType = catType;
-    _storeName = storeName;
-    _storeDescription = storeDescription;
-    _logo = logo;
-    _storeUrl = storeUrl;
-    _noOfRatings = noOfRatings;
-    _rating = rating;
-    _bankName = bankName;
-    _bankCode = bankCode;
-    _accountName = accountName;
-    _accountNumber = accountNumber;
-    _nationalIdentityCard = nationalIdentityCard;
-    _addressProof = addressProof;
-    _panNumber = panNumber;
-    _taxName = taxName;
-    _taxNumber = taxNumber;
-    _permissions = permissions;
-    _commission = commission;
-    _status = status;
-    _dateAdded = dateAdded;
-    _sellerId = sellerId;
-    _kilometers = kilometers;
+    _groupId = groupId;
 }
 
-  Dactordata.fromJson(dynamic json) {
+  Data.fromJson(dynamic json) {
     _id = json['id'];
     _ipAddress = json['ip_address'];
     _categoryId = json['category_id'];
@@ -358,30 +289,7 @@ class Dactordata {
     _closeTime = json['close_time'];
     _clinicAddress = json['clinic_address'];
     _userId = json['user_id'];
-    _slug = json['slug'];
-    _categoryIds = json['category_ids'];
-    _catType = json['cat_type'];
-    _storeName = json['store_name'];
-    _storeDescription = json['store_description'];
-    _logo = json['logo'];
-    _storeUrl = json['store_url'];
-    _noOfRatings = json['no_of_ratings'];
-    _rating = json['rating'];
-    _bankName = json['bank_name'];
-    _bankCode = json['bank_code'];
-    _accountName = json['account_name'];
-    _accountNumber = json['account_number'];
-    _nationalIdentityCard = json['national_identity_card'];
-    _addressProof = json['address_proof'];
-    _panNumber = json['pan_number'];
-    _taxName = json['tax_name'];
-    _taxNumber = json['tax_number'];
-    _permissions = json['permissions'];
-    _commission = json['commission'];
-    _status = json['status'];
-    _dateAdded = json['date_added'];
-    _sellerId = json['seller_id'];
-    _kilometers = json['kilometers'];
+    _groupId = json['group_id'];
   }
   String? _id;
   String? _ipAddress;
@@ -389,8 +297,8 @@ class Dactordata {
   dynamic _companyName;
   dynamic _companyDivision;
   dynamic _designationId;
-  String? _title;
-  String? _gender;
+  dynamic _title;
+  dynamic _gender;
   String? _username;
   String? _password;
   String? _email;
@@ -405,19 +313,19 @@ class Dactordata {
   dynamic _rememberSelector;
   dynamic _rememberCode;
   String? _createdOn;
-  String? _lastLogin;
+  dynamic _lastLogin;
   String? _active;
   dynamic _company;
-  String? _address;
+  dynamic _address;
   dynamic _cAddress;
-  String? _docDigree;
+  dynamic _docDigree;
   String? _bonusType;
   dynamic _bonus;
   String? _cashReceived;
   dynamic _dob;
-  dynamic _countryCode;
+  String? _countryCode;
   dynamic _otp;
-  String? _roll;
+  dynamic _roll;
   dynamic _city;
   dynamic _area;
   dynamic _street;
@@ -428,51 +336,28 @@ class Dactordata {
   dynamic _friendsCode;
   dynamic _fcmId;
   dynamic _deviceToken;
-  String? _latitude;
-  String? _longitude;
+  dynamic _latitude;
+  dynamic _longitude;
   String? _createdAt;
-  String? _stateId;
-  String? _cityId;
-  String? _serviceType;
+  dynamic _stateId;
+  dynamic _cityId;
+  dynamic _serviceType;
   dynamic _areaId;
-  String? _experience;
-  String? _consultancyFees;
+  dynamic _experience;
+  dynamic _consultancyFees;
   dynamic _openTime;
   dynamic _closeTime;
-  String? _clinicAddress;
+  dynamic _clinicAddress;
   String? _userId;
-  dynamic _slug;
-  String? _categoryIds;
-  dynamic _catType;
-  dynamic _storeName;
-  dynamic _storeDescription;
-  String? _logo;
-  dynamic _storeUrl;
-  String? _noOfRatings;
-  String? _rating;
-  dynamic _bankName;
-  dynamic _bankCode;
-  dynamic _accountName;
-  dynamic _accountNumber;
-  dynamic _nationalIdentityCard;
-  String? _addressProof;
-  dynamic _panNumber;
-  dynamic _taxName;
-  dynamic _taxNumber;
-  dynamic _permissions;
-  String? _commission;
-  String? _status;
-  String? _dateAdded;
-  String? _sellerId;
-  String? _kilometers;
-  Dactordata copyWith({  String? id,
+  String? _groupId;
+Data copyWith({  String? id,
   String? ipAddress,
   dynamic categoryId,
   dynamic companyName,
   dynamic companyDivision,
   dynamic designationId,
-  String? title,
-  String? gender,
+  dynamic title,
+  dynamic gender,
   String? username,
   String? password,
   String? email,
@@ -487,19 +372,19 @@ class Dactordata {
   dynamic rememberSelector,
   dynamic rememberCode,
   String? createdOn,
-  String? lastLogin,
+  dynamic lastLogin,
   String? active,
   dynamic company,
-  String? address,
+  dynamic address,
   dynamic cAddress,
-  String? docDigree,
+  dynamic docDigree,
   String? bonusType,
   dynamic bonus,
   String? cashReceived,
   dynamic dob,
-  dynamic countryCode,
+  String? countryCode,
   dynamic otp,
-  String? roll,
+  dynamic roll,
   dynamic city,
   dynamic area,
   dynamic street,
@@ -510,44 +395,21 @@ class Dactordata {
   dynamic friendsCode,
   dynamic fcmId,
   dynamic deviceToken,
-  String? latitude,
-  String? longitude,
+  dynamic latitude,
+  dynamic longitude,
   String? createdAt,
-  String? stateId,
-  String? cityId,
-  String? serviceType,
+  dynamic stateId,
+  dynamic cityId,
+  dynamic serviceType,
   dynamic areaId,
-  String? experience,
-  String? consultancyFees,
+  dynamic experience,
+  dynamic consultancyFees,
   dynamic openTime,
   dynamic closeTime,
-  String? clinicAddress,
+  dynamic clinicAddress,
   String? userId,
-  dynamic slug,
-  String? categoryIds,
-  dynamic catType,
-  dynamic storeName,
-  dynamic storeDescription,
-  String? logo,
-  dynamic storeUrl,
-  String? noOfRatings,
-  String? rating,
-  dynamic bankName,
-  dynamic bankCode,
-  dynamic accountName,
-  dynamic accountNumber,
-  dynamic nationalIdentityCard,
-  String? addressProof,
-  dynamic panNumber,
-  dynamic taxName,
-  dynamic taxNumber,
-  dynamic permissions,
-  String? commission,
-  String? status,
-  String? dateAdded,
-  String? sellerId,
-  String? kilometers,
-}) => Dactordata(  id: id ?? _id,
+  String? groupId,
+}) => Data(  id: id ?? _id,
   ipAddress: ipAddress ?? _ipAddress,
   categoryId: categoryId ?? _categoryId,
   companyName: companyName ?? _companyName,
@@ -605,30 +467,7 @@ class Dactordata {
   closeTime: closeTime ?? _closeTime,
   clinicAddress: clinicAddress ?? _clinicAddress,
   userId: userId ?? _userId,
-  slug: slug ?? _slug,
-  categoryIds: categoryIds ?? _categoryIds,
-  catType: catType ?? _catType,
-  storeName: storeName ?? _storeName,
-  storeDescription: storeDescription ?? _storeDescription,
-  logo: logo ?? _logo,
-  storeUrl: storeUrl ?? _storeUrl,
-  noOfRatings: noOfRatings ?? _noOfRatings,
-  rating: rating ?? _rating,
-  bankName: bankName ?? _bankName,
-  bankCode: bankCode ?? _bankCode,
-  accountName: accountName ?? _accountName,
-  accountNumber: accountNumber ?? _accountNumber,
-  nationalIdentityCard: nationalIdentityCard ?? _nationalIdentityCard,
-  addressProof: addressProof ?? _addressProof,
-  panNumber: panNumber ?? _panNumber,
-  taxName: taxName ?? _taxName,
-  taxNumber: taxNumber ?? _taxNumber,
-  permissions: permissions ?? _permissions,
-  commission: commission ?? _commission,
-  status: status ?? _status,
-  dateAdded: dateAdded ?? _dateAdded,
-  sellerId: sellerId ?? _sellerId,
-  kilometers: kilometers ?? _kilometers,
+  groupId: groupId ?? _groupId,
 );
   String? get id => _id;
   String? get ipAddress => _ipAddress;
@@ -636,8 +475,8 @@ class Dactordata {
   dynamic get companyName => _companyName;
   dynamic get companyDivision => _companyDivision;
   dynamic get designationId => _designationId;
-  String? get title => _title;
-  String? get gender => _gender;
+  dynamic get title => _title;
+  dynamic get gender => _gender;
   String? get username => _username;
   String? get password => _password;
   String? get email => _email;
@@ -652,19 +491,19 @@ class Dactordata {
   dynamic get rememberSelector => _rememberSelector;
   dynamic get rememberCode => _rememberCode;
   String? get createdOn => _createdOn;
-  String? get lastLogin => _lastLogin;
+  dynamic get lastLogin => _lastLogin;
   String? get active => _active;
   dynamic get company => _company;
-  String? get address => _address;
+  dynamic get address => _address;
   dynamic get cAddress => _cAddress;
-  String? get docDigree => _docDigree;
+  dynamic get docDigree => _docDigree;
   String? get bonusType => _bonusType;
   dynamic get bonus => _bonus;
   String? get cashReceived => _cashReceived;
   dynamic get dob => _dob;
-  dynamic get countryCode => _countryCode;
+  String? get countryCode => _countryCode;
   dynamic get otp => _otp;
-  String? get roll => _roll;
+  dynamic get roll => _roll;
   dynamic get city => _city;
   dynamic get area => _area;
   dynamic get street => _street;
@@ -675,43 +514,20 @@ class Dactordata {
   dynamic get friendsCode => _friendsCode;
   dynamic get fcmId => _fcmId;
   dynamic get deviceToken => _deviceToken;
-  String? get latitude => _latitude;
-  String? get longitude => _longitude;
+  dynamic get latitude => _latitude;
+  dynamic get longitude => _longitude;
   String? get createdAt => _createdAt;
-  String? get stateId => _stateId;
-  String? get cityId => _cityId;
-  String? get serviceType => _serviceType;
+  dynamic get stateId => _stateId;
+  dynamic get cityId => _cityId;
+  dynamic get serviceType => _serviceType;
   dynamic get areaId => _areaId;
-  String? get experience => _experience;
-  String? get consultancyFees => _consultancyFees;
+  dynamic get experience => _experience;
+  dynamic get consultancyFees => _consultancyFees;
   dynamic get openTime => _openTime;
   dynamic get closeTime => _closeTime;
-  String? get clinicAddress => _clinicAddress;
+  dynamic get clinicAddress => _clinicAddress;
   String? get userId => _userId;
-  dynamic get slug => _slug;
-  String? get categoryIds => _categoryIds;
-  dynamic get catType => _catType;
-  dynamic get storeName => _storeName;
-  dynamic get storeDescription => _storeDescription;
-  String? get logo => _logo;
-  dynamic get storeUrl => _storeUrl;
-  String? get noOfRatings => _noOfRatings;
-  String? get rating => _rating;
-  dynamic get bankName => _bankName;
-  dynamic get bankCode => _bankCode;
-  dynamic get accountName => _accountName;
-  dynamic get accountNumber => _accountNumber;
-  dynamic get nationalIdentityCard => _nationalIdentityCard;
-  String? get addressProof => _addressProof;
-  dynamic get panNumber => _panNumber;
-  dynamic get taxName => _taxName;
-  dynamic get taxNumber => _taxNumber;
-  dynamic get permissions => _permissions;
-  String? get commission => _commission;
-  String? get status => _status;
-  String? get dateAdded => _dateAdded;
-  String? get sellerId => _sellerId;
-  String? get kilometers => _kilometers;
+  String? get groupId => _groupId;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -773,30 +589,7 @@ class Dactordata {
     map['close_time'] = _closeTime;
     map['clinic_address'] = _clinicAddress;
     map['user_id'] = _userId;
-    map['slug'] = _slug;
-    map['category_ids'] = _categoryIds;
-    map['cat_type'] = _catType;
-    map['store_name'] = _storeName;
-    map['store_description'] = _storeDescription;
-    map['logo'] = _logo;
-    map['store_url'] = _storeUrl;
-    map['no_of_ratings'] = _noOfRatings;
-    map['rating'] = _rating;
-    map['bank_name'] = _bankName;
-    map['bank_code'] = _bankCode;
-    map['account_name'] = _accountName;
-    map['account_number'] = _accountNumber;
-    map['national_identity_card'] = _nationalIdentityCard;
-    map['address_proof'] = _addressProof;
-    map['pan_number'] = _panNumber;
-    map['tax_name'] = _taxName;
-    map['tax_number'] = _taxNumber;
-    map['permissions'] = _permissions;
-    map['commission'] = _commission;
-    map['status'] = _status;
-    map['date_added'] = _dateAdded;
-    map['seller_id'] = _sellerId;
-    map['kilometers'] = _kilometers;
+    map['group_id'] = _groupId;
     return map;
   }
 

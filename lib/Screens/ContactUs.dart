@@ -2,18 +2,18 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:muddypawsuser/Api.path.dart';
 import 'package:http/http.dart' as http;
 
+import '../Api.path.dart';
 import '../Colors.dart';
-class Terms extends StatefulWidget {
-  const Terms({Key? key}) : super(key: key);
+class Contactus extends StatefulWidget {
+  const Contactus({Key? key}) : super(key: key);
 
   @override
-  State<Terms> createState() => _TermsState();
+  State<Contactus> createState() => _ContactusState();
 }
 
-class _TermsState extends State<Terms> {
+class _ContactusState extends State<Contactus> {
 
   @override
   void initState() {
@@ -30,7 +30,7 @@ class _TermsState extends State<Terms> {
     getSetting();
   }
 
-  var termsConditions;
+  var contactUS;
   getSetting() async {
     var headers = {
       'Cookie': 'ci_session=1895105d72f1bebfa6d3e255c4cbbbeda793981b'
@@ -41,16 +41,17 @@ class _TermsState extends State<Terms> {
     if (response.statusCode == 200) {
       final result =  await response.stream.bytesToString();
       final jsonResponse = json.decode(result);
-      print('______asdsadsa____${result}');
+      print('______contactus____${result}');
       setState(() {
-        termsConditions = jsonResponse['data']['terms_conditions'][0];
-        print("termmmmm ${termsConditions}");
+        contactUS = jsonResponse['data']['contact_us'][0];
+        print("termmmmm ${contactUS}");
       });
     }
     else {
-    print(response.reasonPhrase);
+      print(response.reasonPhrase);
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,13 +68,13 @@ class _TermsState extends State<Terms> {
               child: const Icon(Icons.arrow_back_ios, color: colors.black)),
           backgroundColor: colors.white,
           centerTitle: true,
-          title: Text("Terms & Condition", style: TextStyle(fontWeight: FontWeight.w600, color: colors.black),),
+          title: const Text("Contact Us", style: TextStyle(fontWeight: FontWeight.w600, color: colors.black),),
         ),
         body: ListView(
           children: [
-            termsConditions == null || termsConditions == "" ? Center(child: CircularProgressIndicator(color: colors.primary))
+            contactUS == null || contactUS == "" ? Center(child: CircularProgressIndicator(color: colors.primary))
                 : Html(
-                data: termsConditions
+                data: contactUS
             ),
           ],
         ),

@@ -29,7 +29,7 @@ class _SendToBankPageState extends State<SendToBankPage> {
         centerTitle: true,
         title: InkWell(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>AppointmentScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> AppointmentScreen()));
           },
           child: Text(
             'Send to Bank',

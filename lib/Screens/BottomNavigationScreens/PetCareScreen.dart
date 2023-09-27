@@ -1,10 +1,18 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:location/location.dart' as loc;
-import '../../Custom/CustomTextFormField.dart';
-import '../Groomer.dart';
-import '../MyAppointmentsUser.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:muddypawsuser/Api.path.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../Colors.dart';
+import '../../Custom/CustomCard.dart';
+import '../../Models/GetCategoryModel.dart';
+import '../../Models/GetPetsModel.dart';
+import '../FindPets.dart';
 
 class PetCare extends StatefulWidget {
   const PetCare({Key? key}) : super(key: key);
@@ -14,363 +22,350 @@ class PetCare extends StatefulWidget {
 }
 
 class _PetCareState extends State<PetCare> {
-  loc.LocationData? locationData;
-  bool isLoading = false;
-  List<Placemark>? placemark;
+  TextEditingController petNameCtr = TextEditingController();
+  TextEditingController ageCtr = TextEditingController();
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getPermission();
-    // getAddress();
+    getPets();
   }
 
-  void getPermission() async {
-    if (await Permission.location.isGranted) {
-      //get Location
-      // getLocation();
+  GetPetsModel? getpetsmodel;
+  getPets() async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? userId = preferences.getString('user_id');
+    var headers = {
+      'Cookie': 'ci_session=2b56b25790a6b3730de399acf97f00e2136c0f20'
+    };
+    var request = http.MultipartRequest('POST', Uri.parse(ApiServicves.petProfiles));
+    request.fields.addAll({
+      'user_id': "${userId}"
+    });
+    print("get pets user id ${request.fields}");
+    request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
+    if (response.statusCode == 200) {
+      var finalResponse = await response.stream.bytesToString();
+      final jsonResponse = GetPetsModel.fromJson(json.decode(finalResponse));
       setState(() {
-        getLocation();
+        getpetsmodel = jsonResponse;
+        print("resonseee ${finalResponse}");
       });
-    } else {
-      Permission.location.request();
+    }
+    else {
+      print(response.reasonPhrase);
     }
   }
 
-  void getLocation() async {
-    setState(() {
-      getAddress();
-      isLoading = true;
+  petProfile() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? userId = preferences.getString('user_id');
+    var request = http.MultipartRequest('POST', Uri.parse(ApiServicves.createProfile));
+    request.fields.addAll({
+      'user_id': '${userId}',
+      'pet_type': "${dropdownvalue}",
+      'username': '${petNameCtr.text}',
+      'age': '${ageCtr.text}',
+      // 'id': '7'
     });
-    getAddress();
 
-    locationData = await loc.Location.instance.getLocation();
-
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  void getAddress() async {
-    if (locationData != null) {
-      setState(() {
-        isLoading = true;
-      });
-      placemark = await placemarkFromCoordinates(
-          locationData!.latitude!, locationData!.longitude!);
-      setState(() {
-        isLoading = false;
-      });
+    print("pet profile parammeter ${request.fields}");
+    request.files.add(await http.MultipartFile.fromPath('image', imageFile!.path.toString()));
+    http.StreamedResponse response = await request.send();
+    if (response.statusCode == 200) {
+      var finalResponse = await response.stream.bytesToString();
+      final jsonresponse = json.decode(finalResponse);
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>  FindPetStuff()));
+    }
+    else {
+      print(response.reasonPhrase);
     }
   }
 
-  List s1 = [
-    {"img": "assets/images/logo/Group 169.png", "name": "Stay Home \nGet Discount"},
-    {"img": "assets/images/logo/Group 170.png", "name": "Get 50% \nOff Medicine"},
-  ];
-
-  List speciList = [
-    {"img": "assets/images/logo/Group 169.png", "name": "TRAINERS"},
-    {"img": "assets/images/logo/Group 171.png", "name": "DOCTORS"},
-    {"img": "assets/images/logo/Group 172.png", "name": "GROOMERS"},
-    {"img": "assets/images/logo/Group 169.png", "name": "PET FOOD"}
+  String dropdownvalue = "Dog";
+  var items = [
+    'Dog',
+    'Cat',
   ];
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 30,
-            ),
-            // Row(
-            //   children: [
-            //     InkWell(
-            //         onTap: () {
-            //           // getAddress();
-            //         },
-            //         child: Icon(
-            //           Icons.location_pin,
-            //           color: Colors.blue,
-            //         )),
-            //     SizedBox(
-            //       width: MediaQuery.of(context).size.width / 30,
-            //     ),
-            //     Text(
-            //       placemark != null
-            //           ? "Address:${placemark![0].street} ${placemark![0].locality} ${placemark![0].country}"
-            //           : "Address : Not Available",
-            //       style: TextStyle(fontWeight: FontWeight.bold),
-            //     ),
-            //   ],
-            // ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 30,
-            ),
-            Text(
-              "Hello, Sam Smith",
-              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 60,
-            ),
-            InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>MyAppointment()));
-              },
-              child: const Text(
-                "Find Pet Care",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomTextFormField(
-              name: 'textform',
-              width: double.infinity,
-              Icon: Icons.search,
-              hint: "Search",
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Find by Specialities",
-                  style: TextStyle(
-                      color: Colors.grey, fontWeight: FontWeight.bold),
-                ),
-                TextButton(
-                    onPressed: () {
-                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>Grid()));
-                    },
-                    child: Text(
-                      "View all",
-                      style: TextStyle(color: Colors.blue),
-                    )),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
-              child: Column(
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height / 6.5,
-
-                    // width: MediaQuery.of(context).size.width / 17,
-
-                    child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-
-                        //physics: NeverScrollableScrollPhysics(),
-
-                        itemCount: speciList.length,
-                        // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        //     crossAxisCount: 1,
-                        //     crossAxisSpacing: 5,
-                        //     mainAxisSpacing: 1,
-                        //     mainAxisExtent: 100),
-
-                        separatorBuilder: (context, index) {
-                          return SizedBox(
-                            width: 15,
-                          );
-                        },
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              // Navigator.push(context, MaterialPageRoute(builder: (context)=>AllProduct()));
-                            },
-                            child: Container(
-                              // height:30,
-
-                              //  MediaQuery.of(context).size.height * 50,
-
-                              child: Stack(
-                                children: [
-                                  Image(
-                                    image: AssetImage(
-                                      speciList[index]["img"],
-                                    ),
-                                    fit: BoxFit.fill,
-                                  ),
-                                  Padding(
-                                    padding:
-                                    const EdgeInsets.only(top: 10, left: 5),
-                                    child: Text(
-                                      speciList[index]["name"],
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        }),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Sponsors ad",
-              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 10,
-            ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              height: MediaQuery.of(context).size.height / 7.5,
-
-              // width: MediaQuery.of(context).size.width / 17,
-
-              child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-
-                  //physics: NeverScrollableScrollPhysics(),
-
-                  itemCount: s1.length,
-                  // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  //     crossAxisCount: 1,
-                  //     crossAxisSpacing: 5,
-                  //     mainAxisSpacing: 1,
-                  //     mainAxisExtent: 100),
-
-                  separatorBuilder: (context, index) {
-                    return SizedBox(
-                      width: 15,
-                    );
-                  },
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>AllProduct()));
-                      },
-                      child: Container(
-                        // height:30,
-
-                        //  MediaQuery.of(context).size.height * 50,
-
-                        child: Stack(
-                          children: [
-                            Image(
-                              image: AssetImage(
-                                "assets/images/logo/Group 173.png",
-                              ),
-                              fit: BoxFit.fill,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Center(
-                                child: Text(
-                                  s1[index]["name"],
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 18),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-            ),
-            // CustomGridView(
-            //   itemcount: '5',
-            //   mainaxis: "280",
-            //   imgPath: "assets/images/s1.png",
-            // ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 50,
-            ),
-            Text(
-              "Near you",
-              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 50,
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SearchScreen()),
-               );
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.12,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white60,
-                ),
-                child: Row(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        // width: MediaQuery.of(context).size.width / 6.5,
-                        // height: MediaQuery.of(context).size.height / 14,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(9),
-                              child: Image.asset(
-                                "assets/images/logo/Group 169.png",
-                                fit: BoxFit.fill,
-                              ))),
-                    ),
-                    Expanded(
-                      flex: 5,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 5),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Dr. Joseph Williamson",
-                              style: TextStyle(fontSize: 14),
-                            ),
-                            SizedBox(
-                              height: 2,
-                            ),
-                            Text(
-                              "Groomer at Woof n Purr",
-                              style: TextStyle(fontSize: 12),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Exp 22 Year  Fees \$30",
-                              style: TextStyle(fontSize: 10),
-                            ),
-                          ],
-                        ),
+                    const Center(
+                      child: Text(
+                        "Pets",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height/79,
                     ),
                   ],
                 ),
+              ),
+            ),
+           Container(
+             color: colors.white,
+             child: Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                 const Text(
+                   "Pet Name",
+                   style: TextStyle(
+                       fontSize: 14, fontWeight: FontWeight.w600),
+                 ),
+                 SizedBox(
+                   height: MediaQuery.of(context).size.height * .01,
+                 ),
+                 TextFormField(
+                   controller: petNameCtr,
+                   decoration: InputDecoration(
+                       border: OutlineInputBorder(
+                         borderRadius: BorderRadius.circular(10),
+                       ),
+                       counterText: "",
+                       hintText: 'Pet Name',
+                       hintStyle: TextStyle(fontSize: 13),
+                       contentPadding: EdgeInsets.only(left: 10)
+                   ),
+                   validator: (v) {
+                     if (v!.isEmpty) {
+                       return "Pet Name is required";
+                     }
+                   },
+                 ),
+                   SizedBox(
+                     height: MediaQuery.of(context).size.height * .01,
+                   ),
+                   const Text(
+                     "Pet Age",
+                     style: TextStyle(
+                         fontSize: 14, fontWeight: FontWeight.w600),
+                   ),
+                   SizedBox(
+                     height: MediaQuery.of(context).size.height * .01,
+                   ),
+                   TextFormField(
+                     controller: ageCtr,
+                     decoration: InputDecoration(
+                         border: OutlineInputBorder(
+                           borderRadius: BorderRadius.circular(10),
+                         ),
+                         counterText: "",
+                         hintText: 'Pet Age',
+                         hintStyle: TextStyle(fontSize: 13),
+                         contentPadding: EdgeInsets.only(left: 10)
+                     ),
+                     validator: (v) {
+                       if (v!.isEmpty) {
+                         return "Age is required";
+                       }
+                     },
+                   ),
+                   SizedBox(
+                     height: MediaQuery.of(context).size.height * .01,
+                   ),
+                   const Text(
+                     "Pet Type",
+                     style: TextStyle(
+                         fontSize: 14, fontWeight: FontWeight.w600),
+                   ),
+                   SizedBox(
+                     height: MediaQuery.of(context).size.height * .01,
+                   ),
+                 /*  Container(
+                     height: 60,
+                     child: DropdownButtonFormField<String>(
+                       value: selectedpets,
+                       validator: (value) {
+                         if (value == null || value.isEmpty) {
+                           return 'Please Select Pets';
+                         } else {
+                           return null;
+                         }
+                       },
+                       onChanged: (newValue) {
+                         setState(() {
+                           selectedpets = newValue;
+                         });
+                       },
+                       items: getpetsmodel?.data?.map((items) {
+                         return DropdownMenuItem(
+                           value: items.id.toString(),
+                           child: Text(items.username.toString()),
+                         );
+                       }).toList(),
+                       decoration: InputDecoration(
+                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                           hintText: 'Select Pets',
+                           label: Text('Select Pets',)
+                       ),
+                     ),
+                   ),*/
+                   Container(
+                     decoration: BoxDecoration(
+                       borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: colors.black.withOpacity(0.4))
+                     ),
+                     child:
+                     DropdownButtonHideUnderline(
+                       child: DropdownButton2(
+                       isExpanded: true,
+                         // Initial Value
+                         value: dropdownvalue,
+                         hint: Icon(Icons.arrow_drop_down_outlined),
+                         items: items.map((String items) {
+                           return DropdownMenuItem(
+                             value: items,
+                             child: Text(items),
+                           );
+                         }).toList(),
+                         // After selecting the desired option,it will
+                         // change button value to selected value
+                         onChanged: (String? newValue) {
+                           setState(() {
+                             dropdownvalue = newValue!;
+                           });
+                         },
+                       ),
+                     ),
+                   ),
+
+                   SizedBox(
+                     height: MediaQuery.of(context).size.height *.02,
+                   ),
+                   ElevatedButton(
+                     style: ElevatedButton.styleFrom(primary: colors.primary),
+                     onPressed: () {
+                       showExitPopup();
+                     },
+                     child: const Text("Upload Pet Image"),
+                   ),
+                   SizedBox(height: 10),
+                   imageFile == null ? SizedBox.shrink():InkWell(
+                     onTap: () {
+                       showExitPopup();
+                     },
+                     child: Container(
+                       height: 100,
+                       width: double.infinity,
+                       margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                       child: Image.file(imageFile!,fit: BoxFit.fill,),
+                     ),
+                   ),
+                   SizedBox(
+                     height: MediaQuery.of(context).size.height/7,
+                   ),
+                   InkWell(
+                     onTap: () {
+                       petProfile();
+                     },
+                     child: Center(
+                       child: Container(
+                         height: 40,
+                         width: MediaQuery.of(context).size.width/1.5,
+                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: colors.primary),
+                           child: Center(child: const Text("Create Profile", style: TextStyle(color: colors.white, fontSize: 15, fontWeight: FontWeight.w600),))),
+                     ),
+                   ),
+                   SizedBox(height: 20,)
+               ],),
+             ),
+           ),
+          ],
+        ),
+      ),
+    );
+  }
+  File? imageFile;
+  _getFromGallery() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+      Navigator.pop(context);
+    }
+  }
+
+  _getFromCamera() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+      Navigator.pop(context);
+    }
+  }
+
+  Future<bool> showExitPopup() async {
+    return await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Select Image'),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                _getFromCamera();
+              },
+              //return false when click on "NO"
+              child:Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Icon(Icons.camera_alt,color: Colors.white,),
+                  SizedBox(width: 10,),
+                  Text('Image from Camera'),
+                ],
+              ),
+            ),
+            const SizedBox(height: 15,),
+            ElevatedButton(
+              onPressed: (){
+                _getFromGallery();
+                // Navigator.pop(context,true);
+                // Navigator.pop(context,true);
+              },
+              //return true when click on "Yes"
+              child:Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Icon(Icons.photo,color: Colors.white),
+                  SizedBox(width: 10,),
+                  Text('Image from Gallery'),
+                ],
               ),
             ),
           ],
         ),
       ),
     );
+    // ??false; //if showDialouge had returned null, then return false
   }
+
 }

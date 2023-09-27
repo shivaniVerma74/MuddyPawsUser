@@ -72,17 +72,17 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   )
                 ],
               )  ,
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
-              Text('Appointment on',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.grey),),
-              SizedBox(height: 15,),
-              Text('12 June 2020 | 12:20 pm',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.black),),
-              SizedBox(height: 40,),
-              Text('Location',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.grey),),
-              SizedBox(height: 15,),
-              Text('Apple Hospital',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.black),),
-              SizedBox(height: 15,),
+              const Text('Appointment on',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.grey),),
+              const SizedBox(height: 15,),
+              const Text('12 June 2020 | 12:20 pm',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.black),),
+              const SizedBox(height: 40,),
+              const Text('Location',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.grey),),
+              const SizedBox(height: 15,),
+              const Text('Apple Hospital',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.black),),
+              const SizedBox(height: 15,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -117,8 +117,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   TextButton(onPressed: (){}, child:
                   Container(
                     child: Row(
-
-                      children: [
+                      children: const [
                         Icon(Icons.download,color: Colors.blue,),
                         Text('  Download',style: TextStyle(color: Colors.blue),),
                       ],
@@ -139,14 +138,12 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
             setState(() {
               index1=0;
             });
-
           },
             child: Container(
                 color: index1==0?Colors.blue:Colors.blue.shade50,
                 height: MediaQuery.of(context).size.height/11,
                 width: MediaQuery.of(context).size.width/2,
                 child: Row(
-
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.call,size: 20,color: index1==1?Colors.blue:Colors.white,),
@@ -157,11 +154,10 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
             ),
           ),
           InkWell(
-            onTap: (){
+            onTap: () {
               setState(() {
                 index1=1;
               });
-
             },
             child:
             Container(
@@ -174,15 +170,14 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     Icon(Icons.chat,size: 20,color: index1==0?Colors.blue:Colors.white),
                     Text(' Chat',style: TextStyle(color: index1==0?Colors.blue:Colors.white),)
                   ],
-                )
-
+                ),
             ),
           ),
         ],
       ),
-
     );
   }
+
   String? _filePath;
   // Future<void> _openFileExplorer() async {
   //   try {

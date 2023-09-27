@@ -132,77 +132,76 @@ class _LoginState extends State<Login> {
                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
                    }
-
                  },
                  child: CustomButton(name: "Continue")),
-              SizedBox(
-                height: MediaQuery.of(context).size.height/19,
-              ),
-              const Text("Quick Continue With",
-                  style: TextStyle(
-                    fontSize: 15,
-                  )),
-              SizedBox(
-                height: MediaQuery.of(context).size.height/69,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height/15,
-                    width: MediaQuery.of(context).size.width/2.2,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.blue,
-                    ),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width/45,
-                        ),
-                        const Icon(
-                          Icons.facebook,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width/17,
-                        ),
-                        const Text(
-                          "Facebook",
-                          style: TextStyle(fontSize: 17, color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height/15,
-                    width: MediaQuery.of(context).size.width/2.2,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.white,
-                    ),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 45,
-                        ),
-                        Container(
-                            height: 26,
-                            width: 26,
-                            child: Image.asset(
-                                "assets/images/icons8-google-48.png")),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 17,
-                        ),
-                        const Text("Gmail"),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 39,
-              ),
+              // SizedBox(
+              //   height: MediaQuery.of(context).size.height/19,
+              // ),
+              // const Text("Quick Continue With",
+              //     style: TextStyle(
+              //       fontSize: 15,
+              //     )),
+              // SizedBox(
+              //   height: MediaQuery.of(context).size.height/69,
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //   children: [
+              //     Container(
+              //       height: MediaQuery.of(context).size.height/15,
+              //       width: MediaQuery.of(context).size.width/2.2,
+              //       decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(8),
+              //         color: Colors.blue,
+              //       ),
+              //       child: Row(
+              //         children: [
+              //           SizedBox(
+              //             width: MediaQuery.of(context).size.width/45,
+              //           ),
+              //           const Icon(
+              //             Icons.facebook,
+              //             color: Colors.white,
+              //           ),
+              //           SizedBox(
+              //             width: MediaQuery.of(context).size.width/17,
+              //           ),
+              //           const Text(
+              //             "Facebook",
+              //             style: TextStyle(fontSize: 17, color: Colors.white),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //     Container(
+              //       height: MediaQuery.of(context).size.height/15,
+              //       width: MediaQuery.of(context).size.width/2.2,
+              //       decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(8),
+              //         color: Colors.white,
+              //       ),
+              //       child: Row(
+              //         children: [
+              //           SizedBox(
+              //             width: MediaQuery.of(context).size.width / 45,
+              //           ),
+              //           Container(
+              //               height: 26,
+              //               width: 26,
+              //               child: Image.asset(
+              //                   "assets/images/icons8-google-48.png")),
+              //           SizedBox(
+              //             width: MediaQuery.of(context).size.width / 17,
+              //           ),
+              //           const Text("Gmail"),
+              //         ],
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // SizedBox(
+              //   height: MediaQuery.of(context).size.height / 39,
+              // ),
               TextButton(
                   onPressed: () {
                     Navigator.pushNamed(context, "register");

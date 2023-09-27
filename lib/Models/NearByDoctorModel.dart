@@ -1,40 +1,40 @@
 /// error : false
 /// message : "Doctor Retrive Success"
-/// data : [{"id":"107","ip_address":"49.43.2.82","category_id":null,"company_name":null,"company_division":null,"designation_id":null,"title":"Dr.","gender":"Female","username":"Shivani Pandey","password":"$2y$10$.OYZZsBaSv/HfBLy49tAJews68ACPeq4BTmp3zS1fkDktKLsrfEZq","email":"shivani.alphawizz@mailinator.com","mobile":"8899665588","image":"https://developmentalphawizz.com/dr_vet_app/uploads/user_image/download_(1).png","balance":"0","activation_selector":"774d17adb10c7a8d140f","activation_code":"$2y$10$OUszjYapdeGEdoLc6HPBnuMoq1M7oxW0BBNvRBdTGj1GQTChwlzV.","forgotten_password_selector":null,"forgotten_password_code":null,"forgotten_password_time":null,"remember_selector":null,"remember_code":null,"created_on":"1693292911","last_login":"1693465044","active":"1","company":null,"address":"medanta vijay nagar","c_address":null,"doc_digree":"Bachelor of Veterinary Science (BVSc)","bonus_type":"percentage_per_order","bonus":null,"cash_received":"0.00","dob":null,"country_code":null,"otp":null,"roll":"1","city":null,"area":null,"street":null,"pincode":null,"serviceable_zipcodes":null,"apikey":null,"referral_code":null,"friends_code":null,"fcm_id":null,"device_token":null,"latitude":"24.530727","longitude":"81.299110","created_at":"2023-08-29 12:38:31","state_id":"9","city_id":"220","service_type":"1","area_id":null,"experience":"5 Year","consultancy_fees":"400","open_time":null,"close_time":null,"clinic_address":"vijay nagar","user_id":"734","slug":null,"category_ids":"167","cat_type":null,"store_name":null,"store_description":null,"logo":"","store_url":null,"no_of_ratings":"0","rating":"0.00","bank_name":null,"bank_code":null,"account_name":null,"account_number":null,"national_identity_card":null,"address_proof":"","pan_number":null,"tax_name":null,"tax_number":null,"permissions":null,"commission":"0.00","status":"0","date_added":"2023-08-29 12:38:31","seller_id":"734","kilometers":"0"}]
+/// data : [{"id":"106","ip_address":"49.43.2.82","category_id":null,"company_name":null,"company_division":null,"designation_id":null,"title":"Dr.","gender":"Female","username":"Dikshaya Pandey","password":"$2y$10$.OYZZsBaSv/HfBLy49tAJews68ACPeq4BTmp3zS1fkDktKLsrfEZq","email":"diksha.alphawizz@mailinator.com","mobile":"7896543214","image":"https://developmentalphawizz.com/dr_vet_app/uploads/user_image/download_(1).png","balance":"0","activation_selector":"774d17adb10c7a8d140f","activation_code":"$2y$10$OUszjYapdeGEdoLc6HPBnuMoq1M7oxW0BBNvRBdTGj1GQTChwlzV.","forgotten_password_selector":null,"forgotten_password_code":null,"forgotten_password_time":null,"remember_selector":null,"remember_code":null,"created_on":"1693292911","last_login":"1693465044","active":"1","company":null,"address":"medanta vijay nagar","c_address":null,"doc_digree":"Bachelor of Veterinary Science (BVSc)","bonus_type":"percentage_per_order","bonus":null,"cash_received":"0.00","dob":null,"country_code":null,"otp":null,"roll":"1","city":null,"area":null,"street":null,"pincode":null,"serviceable_zipcodes":null,"apikey":null,"referral_code":null,"friends_code":null,"fcm_id":null,"device_token":null,"latitude":"22.719568","longitude":"75.857727","created_at":"2023-08-29 12:38:31","state_id":"9","city_id":"220","service_type":"2","area_id":null,"experience":"5 Year","consultancy_fees":"500","open_time":null,"close_time":null,"clinic_address":"vijay nagar","user_id":"729","slug":null,"category_ids":"167","cat_type":null,"store_name":null,"store_description":null,"logo":"","store_url":null,"no_of_ratings":"0","rating":"0.00","bank_name":null,"bank_code":null,"account_name":null,"account_number":null,"national_identity_card":null,"address_proof":"","pan_number":null,"tax_name":null,"tax_number":null,"permissions":null,"commission":"0.00","status":"0","date_added":"2023-08-29 12:38:31","seller_id":"729","kilometers":"5.128990869161761"},{"id":"107","ip_address":"49.43.2.82","category_id":null,"company_name":null,"company_division":null,"designation_id":null,"title":"Dr.","gender":"Female","username":"Shivani Pandey","password":"$2y$10$.OYZZsBaSv/HfBLy49tAJews68ACPeq4BTmp3zS1fkDktKLsrfEZq","email":"shivani.alphawizz@mailinator.com","mobile":"8899665588","image":"https://developmentalphawizz.com/dr_vet_app/uploads/user_image/download_(1).png","balance":"0","activation_selector":"774d17adb10c7a8d140f","activation_code":"$2y$10$OUszjYapdeGEdoLc6HPBnuMoq1M7oxW0BBNvRBdTGj1GQTChwlzV.","forgotten_password_selector":null,"forgotten_password_code":null,"forgotten_password_time":null,"remember_selector":null,"remember_code":null,"created_on":"1693292911","last_login":"1693465044","active":"1","company":null,"address":"medanta vijay nagar","c_address":null,"doc_digree":"Bachelor of Veterinary Science (BVSc)","bonus_type":"percentage_per_order","bonus":null,"cash_received":"0.00","dob":null,"country_code":null,"otp":null,"roll":"1","city":null,"area":null,"street":null,"pincode":null,"serviceable_zipcodes":null,"apikey":null,"referral_code":null,"friends_code":null,"fcm_id":null,"device_token":null,"latitude":"22.719568","longitude":"75.857727","created_at":"2023-08-29 12:38:31","state_id":"9","city_id":"220","service_type":"1","area_id":null,"experience":"5 Year","consultancy_fees":"400","open_time":null,"close_time":null,"clinic_address":"vijay nagar","user_id":"734","slug":null,"category_ids":"167","cat_type":null,"store_name":null,"store_description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.","logo":"","store_url":null,"no_of_ratings":"0","rating":"0.00","bank_name":null,"bank_code":null,"account_name":null,"account_number":null,"national_identity_card":null,"address_proof":"","pan_number":null,"tax_name":null,"tax_number":null,"permissions":null,"commission":"0.00","status":"1","date_added":"2023-08-29 12:38:31","seller_id":"734","kilometers":"5.128990869161761"}]
 
-class GetDoctorModel {
-  GetDoctorModel({
+class NearByDoctorModel {
+  NearByDoctorModel({
       bool? error, 
       String? message, 
-      List<Dactordata>? data,}){
+      List<Data>? data,}){
     _error = error;
     _message = message;
     _data = data;
 }
 
-  GetDoctorModel.fromJson(dynamic json) {
+  NearByDoctorModel.fromJson(dynamic json) {
     _error = json['error'];
     _message = json['message'];
     if (json['data'] != null) {
       _data = [];
       json['data'].forEach((v) {
-        _data?.add(Dactordata.fromJson(v));
+        _data?.add(Data.fromJson(v));
       });
     }
   }
   bool? _error;
   String? _message;
-  List<Dactordata>? _data;
-GetDoctorModel copyWith({  bool? error,
+  List<Data>? _data;
+NearByDoctorModel copyWith({  bool? error,
   String? message,
-  List<Dactordata>? data,
-}) => GetDoctorModel(  error: error ?? _error,
+  List<Data>? data,
+}) => NearByDoctorModel(  error: error ?? _error,
   message: message ?? _message,
   data: data ?? _data,
 );
   bool? get error => _error;
   String? get message => _message;
-  List<Dactordata>? get data => _data;
+  List<Data>? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -48,7 +48,7 @@ GetDoctorModel copyWith({  bool? error,
 
 }
 
-/// id : "107"
+/// id : "106"
 /// ip_address : "49.43.2.82"
 /// category_id : null
 /// company_name : null
@@ -56,10 +56,10 @@ GetDoctorModel copyWith({  bool? error,
 /// designation_id : null
 /// title : "Dr."
 /// gender : "Female"
-/// username : "Shivani Pandey"
+/// username : "Dikshaya Pandey"
 /// password : "$2y$10$.OYZZsBaSv/HfBLy49tAJews68ACPeq4BTmp3zS1fkDktKLsrfEZq"
-/// email : "shivani.alphawizz@mailinator.com"
-/// mobile : "8899665588"
+/// email : "diksha.alphawizz@mailinator.com"
+/// mobile : "7896543214"
 /// image : "https://developmentalphawizz.com/dr_vet_app/uploads/user_image/download_(1).png"
 /// balance : "0"
 /// activation_selector : "774d17adb10c7a8d140f"
@@ -93,19 +93,19 @@ GetDoctorModel copyWith({  bool? error,
 /// friends_code : null
 /// fcm_id : null
 /// device_token : null
-/// latitude : "24.530727"
-/// longitude : "81.299110"
+/// latitude : "22.719568"
+/// longitude : "75.857727"
 /// created_at : "2023-08-29 12:38:31"
 /// state_id : "9"
 /// city_id : "220"
-/// service_type : "1"
+/// service_type : "2"
 /// area_id : null
 /// experience : "5 Year"
-/// consultancy_fees : "400"
+/// consultancy_fees : "500"
 /// open_time : null
 /// close_time : null
 /// clinic_address : "vijay nagar"
-/// user_id : "734"
+/// user_id : "729"
 /// slug : null
 /// category_ids : "167"
 /// cat_type : null
@@ -128,11 +128,11 @@ GetDoctorModel copyWith({  bool? error,
 /// commission : "0.00"
 /// status : "0"
 /// date_added : "2023-08-29 12:38:31"
-/// seller_id : "734"
-/// kilometers : "0"
+/// seller_id : "729"
+/// kilometers : "5.128990869161761"
 
-class Dactordata {
-  Dactordata({
+class Data {
+  Data({
       String? id, 
       String? ipAddress, 
       dynamic categoryId, 
@@ -299,7 +299,7 @@ class Dactordata {
     _kilometers = kilometers;
 }
 
-  Dactordata.fromJson(dynamic json) {
+  Data.fromJson(dynamic json) {
     _id = json['id'];
     _ipAddress = json['ip_address'];
     _categoryId = json['category_id'];
@@ -465,7 +465,7 @@ class Dactordata {
   String? _dateAdded;
   String? _sellerId;
   String? _kilometers;
-  Dactordata copyWith({  String? id,
+Data copyWith({  String? id,
   String? ipAddress,
   dynamic categoryId,
   dynamic companyName,
@@ -547,7 +547,7 @@ class Dactordata {
   String? dateAdded,
   String? sellerId,
   String? kilometers,
-}) => Dactordata(  id: id ?? _id,
+}) => Data(  id: id ?? _id,
   ipAddress: ipAddress ?? _ipAddress,
   categoryId: categoryId ?? _categoryId,
   companyName: companyName ?? _companyName,

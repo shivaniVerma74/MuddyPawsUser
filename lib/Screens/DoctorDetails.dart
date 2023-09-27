@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+
+import '../Colors.dart';
+import '../Models/GetDoctorModel.dart';
+import 'DactorBooking.dart';
 class DoctorDetails extends StatefulWidget {
-  const DoctorDetails({Key? key}) : super(key: key);
+  final Dactordata? model;
+   const DoctorDetails({Key? key, this.model}) : super(key: key);
 
   @override
   State<DoctorDetails> createState() => _DoctorDetailsState();
@@ -8,8 +13,25 @@ class DoctorDetails extends StatefulWidget {
 
 class _DoctorDetailsState extends State<DoctorDetails> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: colors.white,
+      appBar: AppBar(
+        leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(Icons.arrow_back_ios, color: colors.black)),
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: colors.white,
+        title: const Text("Dactors Details", style: TextStyle(fontSize: 15, color: colors.black, fontWeight: FontWeight.w500),),
+      ),
       body: SafeArea(
         child: Container(
           child:Padding(
@@ -19,28 +41,13 @@ class _DoctorDetailsState extends State<DoctorDetails> {
               children: [
                 Container(
                   color: Colors.white,
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      SizedBox( height: MediaQuery.of(context).size.height/15,),
-                    Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                          child: Icon(Icons.arrow_back_ios_new),
-                          onTap: (){
-                            Navigator.pop(context);
-                          }
-                      ),
-                      GestureDetector(
-                        child: Icon(Icons.bookmark_border_outlined),
-                      )
-                    ],
-                    ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height/15,
+                        height: MediaQuery.of(context).size.height/55,
                       ),
                       Row(
                         children: [
@@ -50,23 +57,23 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                             ),
                             height: 150,
                             width: 150,
-                            child:Image.asset('assets/images/doctor3.jpg',fit: BoxFit.fill,) ,
+                            child:Image.network('${widget.model?.image}',fit: BoxFit.fill,) ,
                           ),
-                          Padding(padding: EdgeInsets.only(left: 30),
+                          Padding(
+                            padding: EdgeInsets.only(left: 50),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Experience',style: TextStyle(color: Colors.grey,fontSize: 16),),
-                                SizedBox(height: 8,),
-                                Text('18 years',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
-                                SizedBox(height: 20,),
-                                Text('Consultancy fee',overflow:TextOverflow.ellipsis,style: TextStyle(color: Colors.grey,fontSize: 16),),
-                                SizedBox(height: 8,),
-                                Text('\$28',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500)),
+                              children:  [
+                                Text('Experience',style: TextStyle(color: Colors.grey,fontSize: 14),),
+                                SizedBox(height: 8),
+                                Text('${widget.model?.experience}',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500),),
+                                SizedBox(height: 20),
+                                Text('Consultancy fee',overflow:TextOverflow.ellipsis,style: TextStyle(color: Colors.grey,fontSize: 14),),
+                                SizedBox(height: 8),
+                                Text('${widget.model?.consultancyFees}',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
                               ],
                             ),
-                          )
-                          // Image(image: ""),
+                          ),
                         ],
                       ),
                       Row(
@@ -74,13 +81,13 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                         children: [
                           Container(
                             padding: EdgeInsets.all(10),
-                            child: Text('Dr. Joseph\n Williamson',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20),),
+                            child: Text('${widget.model?.username}',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20),),
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Feedbacks',style: TextStyle(color: Colors.grey,fontSize: 15),),
+                              const Text('Feedbacks',style: TextStyle(color: Colors.grey,fontSize: 14),),
                               SizedBox(height: 10,),
                               Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,39 +96,28 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                     Row(
                                       children: [
                                         Icon(Icons.star,color: Colors.amber,),
-                                        Text(' 4.5',style: TextStyle(color:Colors.amber),),
-                                           Text(' (124)',style: TextStyle(color:Colors.grey),),
+                                        Text('${widget.model?.rating}',style: TextStyle(color:Colors.amber),),
                                       ],
                                     ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: [
-                                        SizedBox(width: 30,),
-                                         Icon(Icons.arrow_forward_ios,color: Colors.grey,)
-                                      ],
-                                    )
                                   ]),
-                              SizedBox(height:30,),
+                              SizedBox(height:30),
                               Row(
                                 children: [
                                   Container(
                                       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text('Availibilty',style: TextStyle(color: Colors.grey,fontSize: 15),),
+                                        children:  [
+                                          Text('Availibilty',style: TextStyle(color: Colors.grey,fontSize: 14),),
                                           SizedBox(height: 10,),
-                                          Text('12:00 to 13:00',style: TextStyle(color: Colors.black,fontSize: 15),),
+                                          Text('${widget.model?.createdAt}',style: TextStyle(color: Colors.black,fontSize: 13),),
                                         ],
-                                      )),
-                                  SizedBox(width: 20,),
-                                  Icon(Icons.arrow_forward_ios,color: Colors.grey,),
+                                      ),
+                                  ),
                                 ],
                               ),
-
                             ],
-                          )
+                          ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -135,7 +131,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                       Text('About',style: TextStyle(color: Colors.grey,fontSize: 15),),
                       SizedBox(height: 10,),
                       SizedBox(height:70,
-                        child: Text(" managed to advance somewhat in solving the problem, but still there are questions. Here is the text of main.dart. By clicking on the canvas, the showPopupMenu3 (context) function is called from handleTapDown (...). The menu does appear, I can catch option, but after selecting the menu isn't closed. To close menu need to press the BACK button or click on the canvas.",style: TextStyle(),overflow: TextOverflow.ellipsis,maxLines: 3,),
+                        child: Text("${widget.model?.storeDescription}",style: TextStyle(),overflow: TextOverflow.ellipsis,maxLines: 3,),
                       )
                     ],
                   ),
@@ -147,7 +143,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Service at',style: TextStyle(color: Colors.grey,fontSize: 15),),
+                      const Text('Service at',style: TextStyle(color: Colors.black,fontSize: 15),),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,38 +151,29 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(height: 15,),
-                              Text('Apple Hospital',style: TextStyle(fontWeight: FontWeight.w500,color: Colors.black,fontSize: 16)),
-                              SizedBox(height: 8,),
-                              Text('JJ Towers, Johnson street,Hemilton')
+                            children:  [
+                              SizedBox(height: 15),
+                              Text('${widget.model?.clinicAddress}',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16)),
                             ],
                           ),
-                          SizedBox(width: 30,),
-                          Icon(Icons.arrow_forward_ios,color: Colors.grey,size: 20,)
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(height: 25,),
-                              Text('Seven Star Clinic',style: TextStyle(fontWeight: FontWeight.w500,color: Colors.black,fontSize: 16),),
-                              SizedBox(height: 8,),
-                              Text('Hemilton bridge City Point,Hemilton')
-                            ],
-                          ),
-                          SizedBox(width: 30,),
-                          Icon(Icons.arrow_forward_ios,color: Colors.grey,size: 20,)
                         ],
                       ),
                     ],
                   ),
-                )
+                ),
+                const SizedBox(height: 15),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>  DactorBooking(id: widget.model?.id, fees: widget.model?.consultancyFees ?? "")));
+                  },
+                  child: Center(
+                    child: Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width/2,
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: colors.primary),
+                        child: const Center(child: Text("Booking", style: TextStyle(fontSize: 15, color: colors.white, fontWeight: FontWeight.w500),))),
+                  ),
+                ),
               ],
             ),
           ),
