@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:muddypawsuser/Api.path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../Colors.dart';
 import '../Models/GetPetsModel.dart';
 import '../Models/MyBookingModel.dart';
@@ -28,7 +29,7 @@ void initState() {
 }
 
 MyBookingModel? myBookingModel;
-  myBooking()  async{
+  myBooking() async{
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String? userId = preferences.getString('user_id');
     var headers = {
@@ -53,327 +54,265 @@ MyBookingModel? myBookingModel;
     }
   }
 
+
+var whatsNumber;
+final whatsapppBoxKey = GlobalKey();
+
+openwhatsapp(number) async {
+  var whatsapp = "$number";
+  var whatsappURl_android = "whatsapp://send?phone=" + whatsapp +
+      "&text=Hello, I am messaging from Muddy,  Can we have chat? ";
+  var whatappURL_ios = "https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
+
+    // for iOS phone only
+    if (await canLaunch(whatappURL_ios)) {
+      await launch(whatappURL_ios, forceSafariVC: false);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: new Text("Whatsapp does not exist in this device")));
+    }
+  //   else {
+  //   // android , web
+  //   if (await canLaunch(whatsappURl_android)) {
+  //     await launch(whatsappURl_android);
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: new Text("Whatsapp does not exist in this device")));
+  //   }
+  // }
+}
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.black,
-              ),
-          ),
-          title: InkWell(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> const SearchScreen()));
-            },
-            child: InkWell(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> const WalletScreen()));
-              },
-              child: const Text(
-                'My Appointment',
-                style: TextStyle(color: Colors.black, fontSize: 17),
-              ),
-            ),
-          ),
-        ),
-        body: Column(
-          children: [
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: myBookingModel?.error == true ? Center(child: Text("No Booking", style: TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.w500),),):
-              Expanded(
-                child: myBookingModel?.data?.length == null || myBookingModel?.data?.length == "" ? Center(child: CircularProgressIndicator(color: colors.primary,),):
-                ListView.builder(
-                  shrinkWrap: true,
-                  // physics: AlwaysScrollableScrollPhysics(),
-                  itemCount: myBookingModel?.data?.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      elevation: 5,
-                      child: Container(
-                        height: 150,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: colors.white),
-                        width: MediaQuery.of(context).size.width,
-                        child: Padding(
-                          padding: const EdgeInsets.all(5),
-                          child:
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  padding: EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(9),
-                                    child: myBookingModel?.data?[index].image == null || myBookingModel?.data?[index].image == "" ? Image.asset("assets/doctorone.png", fit: BoxFit.fill,):
-                                    Image.network(
-                                      "${ApiServicves.imageUrl}${myBookingModel?.data?[index].image}",
-                                      fit: BoxFit.fill,
+    return Material(
+      child: SafeArea(
+          // appBar: AppBar(
+          //   elevation: 0,
+          //   backgroundColor: Colors.white,
+          //   centerTitle: true,
+          //   leading: IconButton(
+          //       onPressed: () {
+          //         Navigator.pop(context);
+          //       },
+          //       icon: const Icon(
+          //         Icons.arrow_back_ios,
+          //         color: Colors.black,
+          //       ),
+          //   ),
+          //   title: const Text(
+          //     'My Appointment',
+          //     style: TextStyle(color: Colors.black, fontSize: 17),
+          //   ),
+          // ),
+         child: Container(
+           height: MediaQuery.of(context).size.height,
+           color: Color(0xfff5f6fb),
+           child: Center(
+              child: Column(
+                children: [
+                  Container(
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Center(
+                            child: Text(
+                              "My Appointments",
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold, fontFamily: "Montserrat"),
+                            ),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height/79,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: myBookingModel?.error == true ? const Center(child: Text("No Appointments", style: TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.w500, fontFamily: "Montserrat"),),):
+                    myBookingModel?.data?.length == null || myBookingModel?.data?.length == "" ? Center(child: CircularProgressIndicator(color: colors.primary,),):
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: myBookingModel?.data?.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          elevation: 5,
+                          child: Container(
+                            height: 150,
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: colors.white),
+                            width: MediaQuery.of(context).size.width,
+                            child: Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(9),
+                                      child: myBookingModel?.data?[index].image == null || myBookingModel?.data?[index].image == "" ? Image.asset("assets/doctorone.png", fit: BoxFit.fill,):
+                                      Image.network(
+                                        "${ApiServicves.imageUrl}${myBookingModel?.data?[index].image}",
+                                        height: 200,
+                                        width: 100,
+                                        // fit: BoxFit.fill,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 5,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(children: [
-                                        const Text("Doctor Name: ", style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold)),
-                                        Text(
-                                          "${myBookingModel?.data?[index].doctorName}",
-                                          style: const TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(children: [
+                                          const Text("Doctor Name: ", style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold, fontFamily: "Montserrat")),
+                                          Text(
+                                            "${myBookingModel?.data?[index].doctorName}",
+                                            style: const TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400, fontFamily: "Montserrat"),
+                                          ),
+                                        ],),
+                                        const SizedBox(
+                                          height: 5,
                                         ),
-                                      ],),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        children: [
-                                          const Text("Pet Type: ", style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold)),
-                                          Text(
-                                            "${myBookingModel?.data?[index].petType}",
-                                            style: const TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        children: [
-                                          const Text("Pet Name: ", style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            "${myBookingModel?.data?[index].petName}",
-                                            style: const TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        children: [
-                                          const Text("Date Time: ", style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            "${myBookingModel?.data?[index].date} ${myBookingModel?.data?[index].timeSlot}",
-                                            style: const TextStyle(
-                                                fontSize: 12,
-                                                fontWeight:FontWeight.w400),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        children: [
-                                          const Text("Payment Type: ", style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
-                                          ),
-                                          Container(
-                                            height: 25,
-                                            width: 80,
-                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: colors.primary),
-                                            child: Center(
-                                              child: Text(
-                                                "${myBookingModel?.data?[index].paymentType}",
-                                                style: const TextStyle(
-                                                    fontSize: 12,
-                                                    color: colors.white,
-                                                    fontWeight:FontWeight.w400),
+                                        Row(
+                                          children: [
+                                            const Text("Pet Type: ", style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold, fontFamily: "Montserrat")),
+                                            Text(
+                                              "${myBookingModel?.data?[index].petType}",
+                                              style: const TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400, fontFamily: "Montserrat"),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: [
+                                            const Text("Pet Name: ", style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold, fontFamily: "Montserrat"),
+                                            ),
+                                            Text(
+                                              "${myBookingModel?.data?[index].petName}",
+                                              style: const TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400, fontFamily: "Montserrat"),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: [
+                                            const Text("Date Time: ", style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold, fontFamily: "Montserrat"),
+                                            ),
+                                            Text(
+                                              "${myBookingModel?.data?[index].date} ${myBookingModel?.data?[index].timeSlot}",
+                                              style: const TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight:FontWeight.w400, fontFamily: "Montserrat"),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            myBookingModel?.data?[index].status == "1" ?
+                                            Container(
+                                              height: 30,
+                                              width: 90,
+                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: colors.primary),
+                                              child: const Center(
+                                                child: Text(
+                                                  "Completed",
+                                                  style: TextStyle(
+                                                      fontSize: 12,
+                                                      color: colors.white,
+                                                      fontWeight:FontWeight.w400,fontFamily: "Montserrat"),
+                                                ),
+                                              ),
+                                            ):
+                                            myBookingModel?.data?[index].status == "2" ?
+                                            Container(
+                                              height: 30,
+                                              width: 90,
+                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: colors.primary),
+                                              child: const Center(
+                                                child: Text(
+                                                  "Rejected",
+                                                  style: TextStyle(
+                                                      fontSize: 12,
+                                                      color: colors.white,
+                                                      fontWeight:FontWeight.w400, fontFamily: "Montserrat"),
+                                                ),
+                                              ),
+                                            ): SizedBox(),
+                                            myBookingModel?.data?[index].status == "0" ?
+                                            Container(
+                                              height: 30,
+                                              width: 90,
+                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: colors.primary),
+                                              child: const Center(
+                                                child: Text(
+                                                  "Scheduled",
+                                                  style: TextStyle(
+                                                      fontSize: 12,
+                                                      color: colors.white,
+                                                      fontWeight:FontWeight.w400,fontFamily: "Montserrat" ),
+                                                ),
+                                              ),
+                                            ): SizedBox(),
+                                               SizedBox(width: 75,),
+                                            InkWell(
+                                              onTap: () {
+                                                openwhatsapp(myBookingModel?.data?[index].doctorMobile);
+                                                  },
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(top: 5, right: 5),
+                                                child: Image.asset("assets/images/whatsup.png", height: 40, width: 40,),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                // Card(
-                //   elevation: 5,
-                //   child: Container(
-                //     child: ListView.builder(
-                //       shrinkWrap: true,
-                //       padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                //       itemCount: myBookingModel?.data?.length,
-                //       itemBuilder: (context, index) {
-                //         return Container(
-                //           width: MediaQuery.of(context).size.width,
-                //           height: MediaQuery.of(context).size.height * 0.2,
-                //           decoration: BoxDecoration(
-                //             borderRadius: BorderRadius.circular(2),
-                //             color: Colors.white,
-                //           ),
-                //           child: Row(
-                //             crossAxisAlignment: CrossAxisAlignment.end,
-                //             children: [
-                //               Expanded(
-                //                 flex: 2,
-                //                 child: Container(
-                //                     padding: EdgeInsets.all(5),
-                //                     decoration: BoxDecoration(
-                //                       borderRadius: BorderRadius.circular(10),
-                //                     ),
-                //                     child: ClipRRect(
-                //                         borderRadius: BorderRadius.circular(9),
-                //                         child: Image.network(
-                //                           "${myBookingModel?.data?[index].image}",
-                //                           fit: BoxFit.fill,
-                //                         ),
-                //                     ),
-                //                 ),
-                //               ),
-                //               Expanded(
-                //                 flex: 5,
-                //                 child: Padding(
-                //                   padding: const EdgeInsets.only(left: 5),
-                //                   child: Column(
-                //                     mainAxisAlignment: MainAxisAlignment.center,
-                //                     crossAxisAlignment: CrossAxisAlignment.start,
-                //                     children: [
-                //                       Row(children: [
-                //                         const Text("Doctor Name: ", style: TextStyle(
-                //                             fontSize: 14,
-                //                             fontWeight: FontWeight.bold)),
-                //                         Text(
-                //                           "${myBookingModel?.data?[index].doctorName}",
-                //                           style: const TextStyle(
-                //                               fontSize: 12,
-                //                               fontWeight: FontWeight.w400),
-                //                         ),
-                //                       ],),
-                //                       const SizedBox(
-                //                         height: 5,
-                //                       ),
-                //                     Row(
-                //                       children: [
-                //                       const Text("Pet Type: ", style: TextStyle(
-                //                           fontSize: 14,
-                //                           fontWeight: FontWeight.bold)),
-                //                       Text(
-                //                         "${myBookingModel?.data?[index].petType}",
-                //                         style: const TextStyle(
-                //                             fontSize: 12,
-                //                             fontWeight: FontWeight.w400),
-                //                       ),
-                //                     ],
-                //                     ),
-                //                       const SizedBox(
-                //                         height: 5,
-                //                       ),
-                //                       Row(
-                //                         children: [
-                //                           const Text("Pet Name: ", style: TextStyle(
-                //                               fontSize: 14,
-                //                               fontWeight: FontWeight.bold),
-                //                           ),
-                //                           Text(
-                //                             "${myBookingModel?.data?[index].petName}",
-                //                             style: const TextStyle(
-                //                                 fontSize: 12,
-                //                                 fontWeight: FontWeight.w400),
-                //                           ),
-                //                         ],
-                //                       ),
-                //                       const SizedBox(
-                //                         height: 5,
-                //                       ),
-                //                       Row(
-                //                         children: [
-                //                           const Text("Date Time: ", style: TextStyle(
-                //                               fontSize: 14,
-                //                               fontWeight: FontWeight.bold),
-                //                           ),
-                //                           Text(
-                //                             "${myBookingModel?.data?[index].date} ${myBookingModel?.data?[index].timeSlot}",
-                //                             style: const TextStyle(
-                //                                 fontSize: 12,
-                //                                 fontWeight:FontWeight.w400),
-                //                           ),
-                //                         ],
-                //                       ),
-                //                       const SizedBox(
-                //                         height: 5,
-                //                       ),
-                //                       Row(
-                //                         children: [
-                //                           const Text("Payment Type: ", style: TextStyle(
-                //                               fontSize: 14,
-                //                               fontWeight: FontWeight.bold),
-                //                           ),
-                //                           Container(
-                //                             height: 25,
-                //                             width: 80,
-                //                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: colors.primary),
-                //                             child: Center(
-                //                               child: Text(
-                //                                 "${myBookingModel?.data?[index].paymentType}",
-                //                                 style: const TextStyle(
-                //                                     fontSize: 12,
-                //                                     color: colors.white,
-                //                                     fontWeight:FontWeight.w400),
-                //                               ),
-                //                             ),
-                //                           ),
-                //                         ],
-                //                       ),
-                //                     ],
-                //                   ),
-                //                 ),
-                //               ),
-                //
-                //             ],
-                //           ),
-                //         );
-                //       },
-                //     ),
-                //   ),
-                // ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ));
+         )
+      ),
+    );
   }
 }

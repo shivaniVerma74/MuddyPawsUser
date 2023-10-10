@@ -1,40 +1,40 @@
 /// error : false
 /// message : "Booking retrieved successfully"
-/// data : [{"id":"119","user_id":"793","doctor_id":"729","pet_id":"29","description":"New ","day":"","date":"2023-10-03","status":"1","created_at":"2023-10-03 19:41:39","updated_at":"2023-10-03 19:03:09","time_slot":"06:00:00","report":"uploads/review_image/image_picker3759751241696653461.jpg","image":"uploads/review_image/image_picker4785268403648370643.jpg","transaction_id":"TXN1235455555","payment_type":"online","prescription":null,"prescription_description":null,"doctor_name":"Sachin patware gurjar","doctor_mobile":"9754101854","pet_type":"Cat","pet_name":"New Cat"}]
+/// data : [{"id":"120","user_id":"758","doctor_id":"140","pet_id":"27","description":"newww","day":"","date":"2023-10-05","status":"0","created_at":"2023-10-04 15:52:39","updated_at":"2023-10-04 15:52:39","time_slot":"06:00:00","report":"uploads/review_image/image_picker8399667869191797670.jpg","image":"uploads/review_image/image_picker5185124390972804537.jpg","transaction_id":"TXN1235455555","payment_type":"online","prescription":null,"prescription_description":null,"doctor_name":null,"doctor_mobile":null,"clinic_name":null,"service_type":null,"pet_type":"Cat","pet_name":"Cute Cat "},{"id":"118","user_id":"758","doctor_id":"106","pet_id":"27","description":"chchhch","day":"","date":"2023-10-04","status":"0","created_at":"2023-10-03 15:11:08","updated_at":"2023-10-03 15:11:08","time_slot":"06:00:00","report":"uploads/review_image/image_picker5076118507170972653.jpg","image":"uploads/review_image/image_picker6253709555488547174.jpg","transaction_id":"TXN1235455555","payment_type":"online","prescription":null,"prescription_description":null,"doctor_name":null,"doctor_mobile":null,"clinic_name":null,"service_type":null,"pet_type":"Cat","pet_name":"Cute Cat "},{"id":"117","user_id":"758","doctor_id":"106","pet_id":"27","description":"New Pet","day":"","date":"2023-10-03","status":"0","created_at":"2023-10-03 14:54:31","updated_at":"2023-10-03 14:54:31","time_slot":"06:00:00","report":"uploads/review_image/image_picker4895917771031149170.jpg","image":"uploads/review_image/image_picker8766294330761017391.jpg","transaction_id":"TXN1235455555","payment_type":"online","prescription":null,"prescription_description":null,"doctor_name":null,"doctor_mobile":null,"clinic_name":null,"service_type":null,"pet_type":"Cat","pet_name":"Cute Cat "}]
 
-class MyBookingModel {
-  MyBookingModel({
+class PetsHistoryModel {
+  PetsHistoryModel({
       bool? error, 
       String? message, 
-      List<Data>? data,}){
+      List<HistoryData>? data,}){
     _error = error;
     _message = message;
     _data = data;
 }
 
-  MyBookingModel.fromJson(dynamic json) {
+  PetsHistoryModel.fromJson(dynamic json) {
     _error = json['error'];
     _message = json['message'];
     if (json['data'] != null) {
       _data = [];
       json['data'].forEach((v) {
-        _data?.add(Data.fromJson(v));
+        _data?.add(HistoryData.fromJson(v));
       });
     }
   }
   bool? _error;
   String? _message;
-  List<Data>? _data;
-MyBookingModel copyWith({  bool? error,
+  List<HistoryData>? _data;
+PetsHistoryModel copyWith({  bool? error,
   String? message,
-  List<Data>? data,
-}) => MyBookingModel(  error: error ?? _error,
+  List<HistoryData>? data,
+}) => PetsHistoryModel(  error: error ?? _error,
   message: message ?? _message,
   data: data ?? _data,
 );
   bool? get error => _error;
   String? get message => _message;
-  List<Data>? get data => _data;
+  List<HistoryData>? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -48,30 +48,32 @@ MyBookingModel copyWith({  bool? error,
 
 }
 
-/// id : "119"
-/// user_id : "793"
-/// doctor_id : "729"
-/// pet_id : "29"
-/// description : "New "
+/// id : "120"
+/// user_id : "758"
+/// doctor_id : "140"
+/// pet_id : "27"
+/// description : "newww"
 /// day : ""
-/// date : "2023-10-03"
-/// status : "1"
-/// created_at : "2023-10-03 19:41:39"
-/// updated_at : "2023-10-03 19:03:09"
+/// date : "2023-10-05"
+/// status : "0"
+/// created_at : "2023-10-04 15:52:39"
+/// updated_at : "2023-10-04 15:52:39"
 /// time_slot : "06:00:00"
-/// report : "uploads/review_image/image_picker3759751241696653461.jpg"
-/// image : "uploads/review_image/image_picker4785268403648370643.jpg"
+/// report : "uploads/review_image/image_picker8399667869191797670.jpg"
+/// image : "uploads/review_image/image_picker5185124390972804537.jpg"
 /// transaction_id : "TXN1235455555"
 /// payment_type : "online"
 /// prescription : null
 /// prescription_description : null
-/// doctor_name : "Sachin patware gurjar"
-/// doctor_mobile : "9754101854"
+/// doctor_name : null
+/// doctor_mobile : null
+/// clinic_name : null
+/// service_type : null
 /// pet_type : "Cat"
-/// pet_name : "New Cat"
+/// pet_name : "Cute Cat "
 
-class Data {
-  Data({
+class HistoryData {
+  HistoryData({
       String? id, 
       String? userId, 
       String? doctorId, 
@@ -89,8 +91,10 @@ class Data {
       String? paymentType, 
       dynamic prescription, 
       dynamic prescriptionDescription, 
-      String? doctorName, 
-      String? doctorMobile, 
+      dynamic doctorName, 
+      dynamic doctorMobile, 
+      dynamic clinicName, 
+      dynamic serviceType, 
       String? petType, 
       String? petName,}){
     _id = id;
@@ -112,11 +116,13 @@ class Data {
     _prescriptionDescription = prescriptionDescription;
     _doctorName = doctorName;
     _doctorMobile = doctorMobile;
+    _clinicName = clinicName;
+    _serviceType = serviceType;
     _petType = petType;
     _petName = petName;
 }
 
-  Data.fromJson(dynamic json) {
+  HistoryData.fromJson(dynamic json) {
     _id = json['id'];
     _userId = json['user_id'];
     _doctorId = json['doctor_id'];
@@ -136,6 +142,8 @@ class Data {
     _prescriptionDescription = json['prescription_description'];
     _doctorName = json['doctor_name'];
     _doctorMobile = json['doctor_mobile'];
+    _clinicName = json['clinic_name'];
+    _serviceType = json['service_type'];
     _petType = json['pet_type'];
     _petName = json['pet_name'];
   }
@@ -156,11 +164,13 @@ class Data {
   String? _paymentType;
   dynamic _prescription;
   dynamic _prescriptionDescription;
-  String? _doctorName;
-  String? _doctorMobile;
+  dynamic _doctorName;
+  dynamic _doctorMobile;
+  dynamic _clinicName;
+  dynamic _serviceType;
   String? _petType;
   String? _petName;
-Data copyWith({  String? id,
+  HistoryData copyWith({  String? id,
   String? userId,
   String? doctorId,
   String? petId,
@@ -177,11 +187,13 @@ Data copyWith({  String? id,
   String? paymentType,
   dynamic prescription,
   dynamic prescriptionDescription,
-  String? doctorName,
-  String? doctorMobile,
+  dynamic doctorName,
+  dynamic doctorMobile,
+  dynamic clinicName,
+  dynamic serviceType,
   String? petType,
   String? petName,
-}) => Data(  id: id ?? _id,
+}) => HistoryData(  id: id ?? _id,
   userId: userId ?? _userId,
   doctorId: doctorId ?? _doctorId,
   petId: petId ?? _petId,
@@ -200,6 +212,8 @@ Data copyWith({  String? id,
   prescriptionDescription: prescriptionDescription ?? _prescriptionDescription,
   doctorName: doctorName ?? _doctorName,
   doctorMobile: doctorMobile ?? _doctorMobile,
+  clinicName: clinicName ?? _clinicName,
+  serviceType: serviceType ?? _serviceType,
   petType: petType ?? _petType,
   petName: petName ?? _petName,
 );
@@ -220,8 +234,10 @@ Data copyWith({  String? id,
   String? get paymentType => _paymentType;
   dynamic get prescription => _prescription;
   dynamic get prescriptionDescription => _prescriptionDescription;
-  String? get doctorName => _doctorName;
-  String? get doctorMobile => _doctorMobile;
+  dynamic get doctorName => _doctorName;
+  dynamic get doctorMobile => _doctorMobile;
+  dynamic get clinicName => _clinicName;
+  dynamic get serviceType => _serviceType;
   String? get petType => _petType;
   String? get petName => _petName;
 
@@ -246,6 +262,8 @@ Data copyWith({  String? id,
     map['prescription_description'] = _prescriptionDescription;
     map['doctor_name'] = _doctorName;
     map['doctor_mobile'] = _doctorMobile;
+    map['clinic_name'] = _clinicName;
+    map['service_type'] = _serviceType;
     map['pet_type'] = _petType;
     map['pet_name'] = _petName;
     return map;

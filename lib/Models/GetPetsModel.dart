@@ -6,7 +6,7 @@ class GetPetsModel {
   GetPetsModel({
       bool? error, 
       String? message, 
-      List<Data>? data,}){
+      List<PetsData>? data,}){
     _error = error;
     _message = message;
     _data = data;
@@ -18,23 +18,23 @@ class GetPetsModel {
     if (json['data'] != null) {
       _data = [];
       json['data'].forEach((v) {
-        _data?.add(Data.fromJson(v));
+        _data?.add(PetsData.fromJson(v));
       });
     }
   }
   bool? _error;
   String? _message;
-  List<Data>? _data;
+  List<PetsData>? _data;
 GetPetsModel copyWith({  bool? error,
   String? message,
-  List<Data>? data,
+  List<PetsData>? data,
 }) => GetPetsModel(  error: error ?? _error,
   message: message ?? _message,
   data: data ?? _data,
 );
   bool? get error => _error;
   String? get message => _message;
-  List<Data>? get data => _data;
+  List<PetsData>? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -58,8 +58,8 @@ GetPetsModel copyWith({  bool? error,
 /// created_at : "2023-08-29 13:01:11"
 /// updated_at : "2023-08-29 13:01:11"
 
-class Data {
-  Data({
+class PetsData {
+  PetsData({
       String? id, 
       String? userId, 
       String? petType, 
@@ -67,12 +67,14 @@ class Data {
       dynamic image, 
       String? age, 
       dynamic description, 
-      String? createdAt, 
+      String? createdAt,
+      bool? isSelected,
       String? updatedAt,}){
     _id = id;
     _userId = userId;
     _petType = petType;
     _username = username;
+    isSelected = isSelected;
     _image = image;
     _age = age;
     _description = description;
@@ -80,12 +82,13 @@ class Data {
     _updatedAt = updatedAt;
 }
 
-  Data.fromJson(dynamic json) {
+  PetsData.fromJson(dynamic json) {
     _id = json['id'];
     _userId = json['user_id'];
     _petType = json['pet_type'];
     _username = json['username'];
     _image = json['image'];
+    isSelected = false;
     _age = json['age'];
     _description = json['description'];
     _createdAt = json['created_at'];
@@ -99,8 +102,9 @@ class Data {
   String? _age;
   dynamic _description;
   String? _createdAt;
+  bool? isSelected;
   String? _updatedAt;
-Data copyWith({  String? id,
+  PetsData copyWith({  String? id,
   String? userId,
   String? petType,
   String? username,
@@ -109,7 +113,7 @@ Data copyWith({  String? id,
   dynamic description,
   String? createdAt,
   String? updatedAt,
-}) => Data(  id: id ?? _id,
+}) => PetsData(  id: id ?? _id,
   userId: userId ?? _userId,
   petType: petType ?? _petType,
   username: username ?? _username,

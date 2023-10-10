@@ -1,12 +1,12 @@
 /// error : false
 /// message : "Doctor Retrive Success"
-/// data : [{"id":"107","ip_address":"49.43.2.82","category_id":null,"company_name":null,"company_division":null,"designation_id":null,"title":"Dr.","gender":"Female","username":"Shivani Pandey","password":"$2y$10$.OYZZsBaSv/HfBLy49tAJews68ACPeq4BTmp3zS1fkDktKLsrfEZq","email":"shivani.alphawizz@mailinator.com","mobile":"8899665588","image":"https://developmentalphawizz.com/dr_vet_app/uploads/user_image/download_(1).png","balance":"0","activation_selector":"774d17adb10c7a8d140f","activation_code":"$2y$10$OUszjYapdeGEdoLc6HPBnuMoq1M7oxW0BBNvRBdTGj1GQTChwlzV.","forgotten_password_selector":null,"forgotten_password_code":null,"forgotten_password_time":null,"remember_selector":null,"remember_code":null,"created_on":"1693292911","last_login":"1693465044","active":"1","company":null,"address":"medanta vijay nagar","c_address":null,"doc_digree":"Bachelor of Veterinary Science (BVSc)","bonus_type":"percentage_per_order","bonus":null,"cash_received":"0.00","dob":null,"country_code":null,"otp":null,"roll":"1","city":null,"area":null,"street":null,"pincode":null,"serviceable_zipcodes":null,"apikey":null,"referral_code":null,"friends_code":null,"fcm_id":null,"device_token":null,"latitude":"24.530727","longitude":"81.299110","created_at":"2023-08-29 12:38:31","state_id":"9","city_id":"220","service_type":"1","area_id":null,"experience":"5 Year","consultancy_fees":"400","open_time":null,"close_time":null,"clinic_address":"vijay nagar","user_id":"734","slug":null,"category_ids":"167","cat_type":null,"store_name":null,"store_description":null,"logo":"","store_url":null,"no_of_ratings":"0","rating":"0.00","bank_name":null,"bank_code":null,"account_name":null,"account_number":null,"national_identity_card":null,"address_proof":"","pan_number":null,"tax_name":null,"tax_number":null,"permissions":null,"commission":"0.00","status":"0","date_added":"2023-08-29 12:38:31","seller_id":"734","kilometers":"0"}]
+/// data : [{"id":"106","ip_address":"49.43.2.82","category_id":null,"company_name":null,"company_division":null,"designation_id":null,"title":"Dr.","gender":"male","username":"Sachin patware gurjar","password":"$2y$10$.OYZZsBaSv/HfBLy49tAJews68ACPeq4BTmp3zS1fkDktKLsrfEZq","email":"sachin@gmail.com","mobile":"9754101854","image":"https://developmentalphawizz.com/dr_vet_app/uploads/user_image/10001061503.jpg","balance":"0","activation_selector":"774d17adb10c7a8d140f","activation_code":"$2y$10$OUszjYapdeGEdoLc6HPBnuMoq1M7oxW0BBNvRBdTGj1GQTChwlzV.","forgotten_password_selector":null,"forgotten_password_code":null,"forgotten_password_time":null,"remember_selector":null,"remember_code":null,"created_on":"1693292911","last_login":"1693465044","active":"1","company":null,"address":null,"c_address":null,"doc_digree":null,"bonus_type":"percentage_per_order","bonus":null,"cash_received":"0.00","dob":null,"country_code":"91","otp":"6768","roll":"1","city":null,"area":null,"street":null,"pincode":null,"serviceable_zipcodes":null,"apikey":null,"referral_code":null,"friends_code":null,"fcm_id":null,"device_token":null,"latitude":"22.719568","longitude":"75.857727","created_at":"2023-08-29 12:38:31","state_id":"11","city_id":"283","service_type":"1","area_id":null,"experience":"1 year","consultancy_fees":"555","open_time":null,"close_time":null,"clinic_address":"indore","qualification":null,"clinic_name":null,"select_time_schedule":null,"user_id":"729","slug":"-1","category_ids":"167","cat_type":null,"store_name":null,"store_description":"","logo":"10001061503.jpg","store_url":null,"no_of_ratings":"0","rating":"0.00","bank_name":null,"bank_code":null,"account_name":null,"account_number":null,"national_identity_card":null,"address_proof":null,"pan_number":null,"tax_name":null,"tax_number":null,"permissions":null,"commission":"0.00","status":"0","date_added":"2023-08-29 12:38:31","seller_id":"729"},{"id":"107","ip_address":"49.43.2.82","category_id":null,"company_name":null,"company_division":null,"designation_id":null,"title":"Dr.","gender":"Female","username":"Shivani Pandey","password":"$2y$10$.OYZZsBaSv/HfBLy49tAJews68ACPeq4BTmp3zS1fkDktKLsrfEZq","email":"shivani.alphawizz@mailinator.com","mobile":"8899665588","image":"https://developmentalphawizz.com/dr_vet_app/uploads/user_image/download_(1).png","balance":"0","activation_selector":"774d17adb10c7a8d140f","activation_code":"$2y$10$OUszjYapdeGEdoLc6HPBnuMoq1M7oxW0BBNvRBdTGj1GQTChwlzV.","forgotten_password_selector":null,"forgotten_password_code":null,"forgotten_password_time":null,"remember_selector":null,"remember_code":null,"created_on":"1693292911","last_login":"1693465044","active":"1","company":null,"address":"medanta vijay nagar","c_address":null,"doc_digree":"Bachelor of Veterinary Science (BVSc)","bonus_type":"percentage_per_order","bonus":null,"cash_received":"0.00","dob":null,"country_code":null,"otp":null,"roll":"1","city":null,"area":null,"street":null,"pincode":null,"serviceable_zipcodes":null,"apikey":null,"referral_code":null,"friends_code":null,"fcm_id":null,"device_token":null,"latitude":"22.719568","longitude":"75.857727","created_at":"2023-08-29 12:38:31","state_id":"9","city_id":"220","service_type":"1","area_id":null,"experience":"5 Year","consultancy_fees":"400","open_time":null,"close_time":null,"clinic_address":"vijay nagar","qualification":null,"clinic_name":null,"select_time_schedule":null,"user_id":"734","slug":null,"category_ids":"167","cat_type":null,"store_name":null,"store_description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.","logo":"","store_url":null,"no_of_ratings":"0","rating":"0.00","bank_name":null,"bank_code":null,"account_name":null,"account_number":null,"national_identity_card":null,"address_proof":"","pan_number":null,"tax_name":null,"tax_number":null,"permissions":null,"commission":"0.00","status":"1","date_added":"2023-08-29 12:38:31","seller_id":"734"},{"id":"108","ip_address":"122.170.200.23","category_id":null,"company_name":null,"company_division":null,"designation_id":null,"title":"Dr.","gender":"Female","username":"shivani","password":"$2y$10$IozJcoiXBfSguIx/DOPr7eyzPVc8dBPsUbXuzdxYeQH.zvXIrZsVi","email":"shivani32@gmail.com","mobile":"9090909990","image":"https://developmentalphawizz.com/dr_vet_app/uploads/user_image/","balance":"0","activation_selector":"e0c5154cd0f4d9126b46","activation_code":"$2y$10$9zmnoGwaM6InBf6mawEX0OjCmjV5wh4pTGaKNK2BaS16x/Ttt6V0O","forgotten_password_selector":null,"forgotten_password_code":null,"forgotten_password_time":null,"remember_selector":null,"remember_code":null,"created_on":"1695376307","last_login":null,"active":"1","company":null,"address":null,"c_address":null,"doc_digree":null,"bonus_type":"percentage_per_order","bonus":null,"cash_received":"0.00","dob":null,"country_code":"91","otp":null,"roll":null,"city":"220","area":null,"street":null,"pincode":null,"serviceable_zipcodes":null,"apikey":null,"referral_code":null,"friends_code":null,"fcm_id":null,"device_token":null,"latitude":"898998","longitude":"98989","created_at":"2023-09-22 15:21:47","state_id":null,"city_id":null,"service_type":"1","area_id":null,"experience":null,"consultancy_fees":null,"open_time":null,"close_time":null,"clinic_address":"indore","qualification":null,"clinic_name":null,"select_time_schedule":null,"user_id":"739","slug":null,"category_ids":null,"cat_type":null,"store_name":null,"store_description":null,"logo":"","store_url":null,"no_of_ratings":"0","rating":"0.00","bank_name":null,"bank_code":null,"account_name":null,"account_number":null,"national_identity_card":null,"address_proof":"","pan_number":null,"tax_name":null,"tax_number":null,"permissions":null,"commission":"0.00","status":"1","date_added":"2023-09-22 15:21:48","seller_id":"739"},{"id":"109","ip_address":"49.43.2.60","category_id":null,"company_name":null,"company_division":null,"designation_id":null,"title":"Dr.","gender":"female","username":"sachin patware","password":"$2y$10$i93NXjoPjXSMgVlcH8M1gO5lI9GNpHG./V2vUtLIVkY3QVxx7HEpq","email":"s@gmail.com","mobile":"8888888888","image":"https://developmentalphawizz.com/dr_vet_app/uploads/user_image/","balance":"0","activation_selector":"267fa4107f9b55103f8d","activation_code":"$2y$10$12dxhqcJXASjOVLs1RR0iOqx0sb7y6zcPZesYpDUpoQ4hIzT.z45K","forgotten_password_selector":null,"forgotten_password_code":null,"forgotten_password_time":null,"remember_selector":null,"remember_code":null,"created_on":"1695380628","last_login":null,"active":"1","company":null,"address":null,"c_address":null,"doc_digree":null,"bonus_type":"percentage_per_order","bonus":null,"cash_received":"0.00","dob":null,"country_code":"91","otp":"6270","roll":null,"city":"220","area":null,"street":null,"pincode":null,"serviceable_zipcodes":null,"apikey":null,"referral_code":null,"friends_code":null,"fcm_id":null,"device_token":null,"latitude":null,"longitude":null,"created_at":"2023-09-22 16:33:48","state_id":null,"city_id":null,"service_type":"1","area_id":null,"experience":null,"consultancy_fees":null,"open_time":null,"close_time":null,"clinic_address":"indore","qualification":null,"clinic_name":null,"select_time_schedule":null,"user_id":"740","slug":null,"category_ids":null,"cat_type":null,"store_name":null,"store_description":null,"logo":"","store_url":null,"no_of_ratings":"0","rating":"0.00","bank_name":null,"bank_code":null,"account_name":null,"account_number":null,"national_identity_card":null,"address_proof":"","pan_number":null,"tax_name":null,"tax_number":null,"permissions":null,"commission":"0.00","status":"1","date_added":"2023-09-22 16:33:48","seller_id":"740"}]
 
 class GetDoctorModel {
   GetDoctorModel({
       bool? error, 
       String? message, 
-      List<Dactordata>? data,}){
+      List<DactorData>? data,}){
     _error = error;
     _message = message;
     _data = data;
@@ -18,23 +18,23 @@ class GetDoctorModel {
     if (json['data'] != null) {
       _data = [];
       json['data'].forEach((v) {
-        _data?.add(Dactordata.fromJson(v));
+        _data?.add(DactorData.fromJson(v));
       });
     }
   }
   bool? _error;
   String? _message;
-  List<Dactordata>? _data;
+  List<DactorData>? _data;
 GetDoctorModel copyWith({  bool? error,
   String? message,
-  List<Dactordata>? data,
+  List<DactorData>? data,
 }) => GetDoctorModel(  error: error ?? _error,
   message: message ?? _message,
   data: data ?? _data,
 );
   bool? get error => _error;
   String? get message => _message;
-  List<Dactordata>? get data => _data;
+  List<DactorData>? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -48,19 +48,19 @@ GetDoctorModel copyWith({  bool? error,
 
 }
 
-/// id : "107"
+/// id : "106"
 /// ip_address : "49.43.2.82"
 /// category_id : null
 /// company_name : null
 /// company_division : null
 /// designation_id : null
 /// title : "Dr."
-/// gender : "Female"
-/// username : "Shivani Pandey"
+/// gender : "male"
+/// username : "Sachin patware gurjar"
 /// password : "$2y$10$.OYZZsBaSv/HfBLy49tAJews68ACPeq4BTmp3zS1fkDktKLsrfEZq"
-/// email : "shivani.alphawizz@mailinator.com"
-/// mobile : "8899665588"
-/// image : "https://developmentalphawizz.com/dr_vet_app/uploads/user_image/download_(1).png"
+/// email : "sachin@gmail.com"
+/// mobile : "9754101854"
+/// image : "https://developmentalphawizz.com/dr_vet_app/uploads/user_image/10001061503.jpg"
 /// balance : "0"
 /// activation_selector : "774d17adb10c7a8d140f"
 /// activation_code : "$2y$10$OUszjYapdeGEdoLc6HPBnuMoq1M7oxW0BBNvRBdTGj1GQTChwlzV."
@@ -73,15 +73,15 @@ GetDoctorModel copyWith({  bool? error,
 /// last_login : "1693465044"
 /// active : "1"
 /// company : null
-/// address : "medanta vijay nagar"
+/// address : null
 /// c_address : null
-/// doc_digree : "Bachelor of Veterinary Science (BVSc)"
+/// doc_digree : null
 /// bonus_type : "percentage_per_order"
 /// bonus : null
 /// cash_received : "0.00"
 /// dob : null
-/// country_code : null
-/// otp : null
+/// country_code : "91"
+/// otp : "6768"
 /// roll : "1"
 /// city : null
 /// area : null
@@ -93,25 +93,28 @@ GetDoctorModel copyWith({  bool? error,
 /// friends_code : null
 /// fcm_id : null
 /// device_token : null
-/// latitude : "24.530727"
-/// longitude : "81.299110"
+/// latitude : "22.719568"
+/// longitude : "75.857727"
 /// created_at : "2023-08-29 12:38:31"
-/// state_id : "9"
-/// city_id : "220"
+/// state_id : "11"
+/// city_id : "283"
 /// service_type : "1"
 /// area_id : null
-/// experience : "5 Year"
-/// consultancy_fees : "400"
+/// experience : "1 year"
+/// consultancy_fees : "555"
 /// open_time : null
 /// close_time : null
-/// clinic_address : "vijay nagar"
-/// user_id : "734"
-/// slug : null
+/// clinic_address : "indore"
+/// qualification : null
+/// clinic_name : null
+/// select_time_schedule : null
+/// user_id : "729"
+/// slug : "-1"
 /// category_ids : "167"
 /// cat_type : null
 /// store_name : null
-/// store_description : null
-/// logo : ""
+/// store_description : ""
+/// logo : "10001061503.jpg"
 /// store_url : null
 /// no_of_ratings : "0"
 /// rating : "0.00"
@@ -120,7 +123,7 @@ GetDoctorModel copyWith({  bool? error,
 /// account_name : null
 /// account_number : null
 /// national_identity_card : null
-/// address_proof : ""
+/// address_proof : null
 /// pan_number : null
 /// tax_name : null
 /// tax_number : null
@@ -128,11 +131,10 @@ GetDoctorModel copyWith({  bool? error,
 /// commission : "0.00"
 /// status : "0"
 /// date_added : "2023-08-29 12:38:31"
-/// seller_id : "734"
-/// kilometers : "0"
+/// seller_id : "729"
 
-class Dactordata {
-  Dactordata({
+class DactorData {
+  DactorData({
       String? id, 
       String? ipAddress, 
       dynamic categoryId, 
@@ -158,15 +160,15 @@ class Dactordata {
       String? lastLogin, 
       String? active, 
       dynamic company, 
-      String? address, 
+      dynamic address, 
       dynamic cAddress, 
-      String? docDigree, 
+      dynamic docDigree, 
       String? bonusType, 
       dynamic bonus, 
       String? cashReceived, 
       dynamic dob, 
-      dynamic countryCode, 
-      dynamic otp, 
+      String? countryCode, 
+      String? otp, 
       String? roll, 
       dynamic city, 
       dynamic area, 
@@ -190,12 +192,15 @@ class Dactordata {
       dynamic openTime, 
       dynamic closeTime, 
       String? clinicAddress, 
+      dynamic qualification, 
+      dynamic clinicName, 
+      dynamic selectTimeSchedule, 
       String? userId, 
-      dynamic slug, 
+      String? slug, 
       String? categoryIds, 
       dynamic catType, 
       dynamic storeName, 
-      dynamic storeDescription, 
+      String? storeDescription, 
       String? logo, 
       dynamic storeUrl, 
       String? noOfRatings, 
@@ -205,7 +210,7 @@ class Dactordata {
       dynamic accountName, 
       dynamic accountNumber, 
       dynamic nationalIdentityCard, 
-      String? addressProof, 
+      dynamic addressProof, 
       dynamic panNumber, 
       dynamic taxName, 
       dynamic taxNumber, 
@@ -213,8 +218,7 @@ class Dactordata {
       String? commission, 
       String? status, 
       String? dateAdded, 
-      String? sellerId, 
-      String? kilometers,}){
+      String? sellerId,}){
     _id = id;
     _ipAddress = ipAddress;
     _categoryId = categoryId;
@@ -272,6 +276,9 @@ class Dactordata {
     _openTime = openTime;
     _closeTime = closeTime;
     _clinicAddress = clinicAddress;
+    _qualification = qualification;
+    _clinicName = clinicName;
+    _selectTimeSchedule = selectTimeSchedule;
     _userId = userId;
     _slug = slug;
     _categoryIds = categoryIds;
@@ -296,10 +303,9 @@ class Dactordata {
     _status = status;
     _dateAdded = dateAdded;
     _sellerId = sellerId;
-    _kilometers = kilometers;
 }
 
-  Dactordata.fromJson(dynamic json) {
+  DactorData.fromJson(dynamic json) {
     _id = json['id'];
     _ipAddress = json['ip_address'];
     _categoryId = json['category_id'];
@@ -357,6 +363,9 @@ class Dactordata {
     _openTime = json['open_time'];
     _closeTime = json['close_time'];
     _clinicAddress = json['clinic_address'];
+    _qualification = json['qualification'];
+    _clinicName = json['clinic_name'];
+    _selectTimeSchedule = json['select_time_schedule'];
     _userId = json['user_id'];
     _slug = json['slug'];
     _categoryIds = json['category_ids'];
@@ -381,7 +390,6 @@ class Dactordata {
     _status = json['status'];
     _dateAdded = json['date_added'];
     _sellerId = json['seller_id'];
-    _kilometers = json['kilometers'];
   }
   String? _id;
   String? _ipAddress;
@@ -408,15 +416,15 @@ class Dactordata {
   String? _lastLogin;
   String? _active;
   dynamic _company;
-  String? _address;
+  dynamic _address;
   dynamic _cAddress;
-  String? _docDigree;
+  dynamic _docDigree;
   String? _bonusType;
   dynamic _bonus;
   String? _cashReceived;
   dynamic _dob;
-  dynamic _countryCode;
-  dynamic _otp;
+  String? _countryCode;
+  String? _otp;
   String? _roll;
   dynamic _city;
   dynamic _area;
@@ -440,12 +448,15 @@ class Dactordata {
   dynamic _openTime;
   dynamic _closeTime;
   String? _clinicAddress;
+  dynamic _qualification;
+  dynamic _clinicName;
+  dynamic _selectTimeSchedule;
   String? _userId;
-  dynamic _slug;
+  String? _slug;
   String? _categoryIds;
   dynamic _catType;
   dynamic _storeName;
-  dynamic _storeDescription;
+  String? _storeDescription;
   String? _logo;
   dynamic _storeUrl;
   String? _noOfRatings;
@@ -455,7 +466,7 @@ class Dactordata {
   dynamic _accountName;
   dynamic _accountNumber;
   dynamic _nationalIdentityCard;
-  String? _addressProof;
+  dynamic _addressProof;
   dynamic _panNumber;
   dynamic _taxName;
   dynamic _taxNumber;
@@ -464,8 +475,7 @@ class Dactordata {
   String? _status;
   String? _dateAdded;
   String? _sellerId;
-  String? _kilometers;
-  Dactordata copyWith({  String? id,
+  DactorData copyWith({  String? id,
   String? ipAddress,
   dynamic categoryId,
   dynamic companyName,
@@ -490,15 +500,15 @@ class Dactordata {
   String? lastLogin,
   String? active,
   dynamic company,
-  String? address,
+  dynamic address,
   dynamic cAddress,
-  String? docDigree,
+  dynamic docDigree,
   String? bonusType,
   dynamic bonus,
   String? cashReceived,
   dynamic dob,
-  dynamic countryCode,
-  dynamic otp,
+  String? countryCode,
+  String? otp,
   String? roll,
   dynamic city,
   dynamic area,
@@ -522,12 +532,15 @@ class Dactordata {
   dynamic openTime,
   dynamic closeTime,
   String? clinicAddress,
+  dynamic qualification,
+  dynamic clinicName,
+  dynamic selectTimeSchedule,
   String? userId,
-  dynamic slug,
+  String? slug,
   String? categoryIds,
   dynamic catType,
   dynamic storeName,
-  dynamic storeDescription,
+  String? storeDescription,
   String? logo,
   dynamic storeUrl,
   String? noOfRatings,
@@ -537,7 +550,7 @@ class Dactordata {
   dynamic accountName,
   dynamic accountNumber,
   dynamic nationalIdentityCard,
-  String? addressProof,
+  dynamic addressProof,
   dynamic panNumber,
   dynamic taxName,
   dynamic taxNumber,
@@ -546,8 +559,7 @@ class Dactordata {
   String? status,
   String? dateAdded,
   String? sellerId,
-  String? kilometers,
-}) => Dactordata(  id: id ?? _id,
+}) => DactorData(  id: id ?? _id,
   ipAddress: ipAddress ?? _ipAddress,
   categoryId: categoryId ?? _categoryId,
   companyName: companyName ?? _companyName,
@@ -604,6 +616,9 @@ class Dactordata {
   openTime: openTime ?? _openTime,
   closeTime: closeTime ?? _closeTime,
   clinicAddress: clinicAddress ?? _clinicAddress,
+  qualification: qualification ?? _qualification,
+  clinicName: clinicName ?? _clinicName,
+  selectTimeSchedule: selectTimeSchedule ?? _selectTimeSchedule,
   userId: userId ?? _userId,
   slug: slug ?? _slug,
   categoryIds: categoryIds ?? _categoryIds,
@@ -628,7 +643,6 @@ class Dactordata {
   status: status ?? _status,
   dateAdded: dateAdded ?? _dateAdded,
   sellerId: sellerId ?? _sellerId,
-  kilometers: kilometers ?? _kilometers,
 );
   String? get id => _id;
   String? get ipAddress => _ipAddress;
@@ -655,15 +669,15 @@ class Dactordata {
   String? get lastLogin => _lastLogin;
   String? get active => _active;
   dynamic get company => _company;
-  String? get address => _address;
+  dynamic get address => _address;
   dynamic get cAddress => _cAddress;
-  String? get docDigree => _docDigree;
+  dynamic get docDigree => _docDigree;
   String? get bonusType => _bonusType;
   dynamic get bonus => _bonus;
   String? get cashReceived => _cashReceived;
   dynamic get dob => _dob;
-  dynamic get countryCode => _countryCode;
-  dynamic get otp => _otp;
+  String? get countryCode => _countryCode;
+  String? get otp => _otp;
   String? get roll => _roll;
   dynamic get city => _city;
   dynamic get area => _area;
@@ -687,12 +701,15 @@ class Dactordata {
   dynamic get openTime => _openTime;
   dynamic get closeTime => _closeTime;
   String? get clinicAddress => _clinicAddress;
+  dynamic get qualification => _qualification;
+  dynamic get clinicName => _clinicName;
+  dynamic get selectTimeSchedule => _selectTimeSchedule;
   String? get userId => _userId;
-  dynamic get slug => _slug;
+  String? get slug => _slug;
   String? get categoryIds => _categoryIds;
   dynamic get catType => _catType;
   dynamic get storeName => _storeName;
-  dynamic get storeDescription => _storeDescription;
+  String? get storeDescription => _storeDescription;
   String? get logo => _logo;
   dynamic get storeUrl => _storeUrl;
   String? get noOfRatings => _noOfRatings;
@@ -702,7 +719,7 @@ class Dactordata {
   dynamic get accountName => _accountName;
   dynamic get accountNumber => _accountNumber;
   dynamic get nationalIdentityCard => _nationalIdentityCard;
-  String? get addressProof => _addressProof;
+  dynamic get addressProof => _addressProof;
   dynamic get panNumber => _panNumber;
   dynamic get taxName => _taxName;
   dynamic get taxNumber => _taxNumber;
@@ -711,7 +728,6 @@ class Dactordata {
   String? get status => _status;
   String? get dateAdded => _dateAdded;
   String? get sellerId => _sellerId;
-  String? get kilometers => _kilometers;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -772,6 +788,9 @@ class Dactordata {
     map['open_time'] = _openTime;
     map['close_time'] = _closeTime;
     map['clinic_address'] = _clinicAddress;
+    map['qualification'] = _qualification;
+    map['clinic_name'] = _clinicName;
+    map['select_time_schedule'] = _selectTimeSchedule;
     map['user_id'] = _userId;
     map['slug'] = _slug;
     map['category_ids'] = _categoryIds;
@@ -796,7 +815,6 @@ class Dactordata {
     map['status'] = _status;
     map['date_added'] = _dateAdded;
     map['seller_id'] = _sellerId;
-    map['kilometers'] = _kilometers;
     return map;
   }
 

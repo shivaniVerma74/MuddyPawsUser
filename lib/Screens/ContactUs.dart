@@ -58,7 +58,7 @@ class _ContactusState extends State<Contactus> {
     return RefreshIndicator(
       onRefresh: _refresh,
       child: Scaffold(
-        backgroundColor: colors.white,
+        backgroundColor: Color(0xfff5f6fb),
         appBar: AppBar(
           elevation: 0,
           leading: InkWell(
@@ -68,7 +68,7 @@ class _ContactusState extends State<Contactus> {
               child: const Icon(Icons.arrow_back_ios, color: colors.black)),
           backgroundColor: colors.white,
           centerTitle: true,
-          title: const Text("Contact Us", style: TextStyle(fontWeight: FontWeight.w600, color: colors.black),),
+          title: const Text("Support", style: TextStyle(fontWeight: FontWeight.w600, color: colors.black),),
         ),
         body: ListView(
           children: [

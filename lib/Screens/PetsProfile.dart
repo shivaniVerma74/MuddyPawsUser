@@ -7,15 +7,17 @@ import 'package:http/http.dart' as http;
 import '../Api.path.dart';
 import '../Colors.dart';
 import '../Models/GetPetsModel.dart';
+import 'PetsHistoryScreen.dart';
 
-class PetsProfile extends StatefulWidget {
-  const PetsProfile({Key? key}) : super(key: key);
+class PetsDetails extends StatefulWidget {
+  final PetsData? model;
+  const PetsDetails({Key? key, this.model}) : super(key: key);
 
   @override
-  State<PetsProfile> createState() => _PetsProfileState();
+  State<PetsDetails> createState() => _PetsDetailsState();
 }
 
-class _PetsProfileState extends State<PetsProfile> {
+class _PetsDetailsState extends State<PetsDetails> {
 
   @override
   void initState() {
@@ -50,25 +52,25 @@ class _PetsProfileState extends State<PetsProfile> {
     }
   }
 
-  deletePets(index) async{
-    var headers = {
-      'Cookie': 'ci_session=f6fff50f24331e0bb1ed898cc8becc67b092089f'
-    };
-    var request = http.MultipartRequest('POST', Uri.parse(ApiServicves.deleteProfile));
-    request.fields.addAll({
-      'id': '${getpetsmodel?.data?[index].id}'
-    });
-    request.headers.addAll(headers);
-    http.StreamedResponse response = await request.send();
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-      await getPets();
-      Fluttertoast.showToast(msg: "Profile deleted success");
-    }
-    else {
-      print(response.reasonPhrase);
-    }
-  }
+  // deletePets() async{
+  //   var headers = {
+  //     'Cookie': 'ci_session=f6fff50f24331e0bb1ed898cc8becc67b092089f'
+  //   };
+  //   var request = http.MultipartRequest('POST', Uri.parse(ApiServicves.deleteProfile));
+  //   request.fields.addAll({
+  //     'id': '${getpetsmodel?.data?[index].id}'
+  //   });
+  //   request.headers.addAll(headers);
+  //   http.StreamedResponse response = await request.send();
+  //   if (response.statusCode == 200) {
+  //     print(await response.stream.bytesToString());
+  //     await getPets();
+  //     Fluttertoast.showToast(msg: "Profile deleted success");
+  //   }
+  //   else {
+  //     print(response.reasonPhrase);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -87,272 +89,150 @@ class _PetsProfileState extends State<PetsProfile> {
             ),
           ),
           title: const Text(
-            'Pets Profile',
-            style: TextStyle(color: Colors.black, fontSize: 17),
+            'Pets Details',
+            style: TextStyle(color: Colors.black, fontSize: 15, fontFamily: "Montserrat"),
           ),
         ),
         body:
         Column(
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Expanded(
-                child: getpetsmodel?.data?.length == null || getpetsmodel?.data?.length == "" ? Center(child: CircularProgressIndicator(color: colors.primary)):
-                ListView.builder(
-                  shrinkWrap: true,
-                  // physics: AlwaysScrollableScrollPhysics(),
-                  itemCount: getpetsmodel?.data?.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      elevation: 5,
-                      child: Container(
-                        height: 150,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: colors.white),
-                        width: MediaQuery.of(context).size.width,
-                        child: Padding(
-                          padding: const EdgeInsets.all(5),
-                          child:
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  padding: EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(9),
-                                    child: getpetsmodel?.data?[index].image == null || getpetsmodel?.data?[index].image == "" ? Image.asset("assets/doctorone.png", fit: BoxFit.fill,):
-                                    Image.network(
-                                      "${ApiServicves.imageUrl}${getpetsmodel?.data?[index].image}",
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                ),
+              child: widget.model == null || widget.model == "" ? Center(child: CircularProgressIndicator(color: colors.primary)):
+              InkWell(
+                onTap: () {
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => PetsHistoryScreen(id: getpetsmodel?.data?[index])));
+                },
+                child: Card(
+                  margin: const EdgeInsets.all(10),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  elevation: 5.0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.width/1.1,
+                      width: MediaQuery.of(context).size.width/1,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                // image: DecorationImage(image: AssetImage('assets/images/img.png'),fit: BoxFit.fill)
                               ),
-                              Expanded(
-                                flex: 5,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(children: [
-                                        const Text("Name: ", style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold)),
-                                        Text(
-                                          "${getpetsmodel?.data?[index].username}",
-                                          style: const TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ],),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        children: [
-                                          const Text("Pet Type: ", style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold)),
-                                          Text(
-                                            "${getpetsmodel?.data?[index].petType}",
-                                            style: const TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        children: [
-                                          const Text("Age: ", style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            "${getpetsmodel?.data?[index].age}",
-                                            style: const TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  deletePets(index);
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.only(bottom: 10),
-                                  child: Expanded(child: Icon(Icons.delete, color: colors.black,)),
-                                ),
-                              ),
-                            ],
+                              height: 150,
+                              width: MediaQuery.of(context).size.width,
+                              child:
+                              // Image.asset('assets/images/img.png'),
+                              ClipRRect(
+                                  child: Image.network("${ApiServicves.imageUrl}${widget.model?.image}", )),
+                            ),
                           ),
-                        ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 50),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Padding(padding: EdgeInsets.only(top: 55)),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                        width: MediaQuery.of(context).size.width/2.2,
+                                        child: Row(
+                                          children: const [
+                                            Text("Pet Name:",textAlign: TextAlign.right, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, fontFamily: "Montserrat"),)
+                                          ],
+                                        )),
+                                    Row(
+                                    children: [
+                                    Text("${widget.model?.username}", style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600,fontFamily: "Montserrat"),)
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 7),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                        width: MediaQuery.of(context).size.width/2.2,
+
+                                        child: Row(
+                                          children: const [
+                                            Text("Pet Type:",textAlign: TextAlign.right, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600,fontFamily: "Montserrat"),)
+                                          ],
+                                        )),
+                                    Row(
+                                      children: [
+                                        Text("${widget.model?.petType}", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600,fontFamily: "Montserrat"),)
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 7),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                        width: MediaQuery.of(context).size.width/2.2,
+                                        child: Row(
+                                          children: const [
+                                            Text("Pet Age:", textAlign: TextAlign.right, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600,fontFamily: "Montserrat"),),
+                                          ],
+                                        ),
+                                    ),
+                                     Text("${widget.model?.age}", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600,fontFamily: "Montserrat"),)
+                                  ],
+                                ),
+                                SizedBox(height: 7),
+                                // Row(
+                                //   children: [
+                                //     Container(
+                                //         width: MediaQuery.of(context).size.width/2.2,
+                                //
+                                //         child: Row(
+                                //           children: [
+                                //             Text("Event Name:",textAlign: TextAlign.right),
+                                //           ],
+                                //         )),
+                                //     Container(child: Row(
+                                //       children: [
+                                //         Text("${getEnquiryModel?.data?[index].eventName}"),
+                                //       ],
+                                //     ))
+                                //   ],
+                                // ),
+                                // SizedBox(height: 7),
+                                // Row(
+                                //   children: [
+                                //     Container(
+                                //         width: MediaQuery.of(context).size.width/2.2,
+                                //
+                                //         child: Row(
+                                //           children: [
+                                //             Text("Description:",textAlign: TextAlign.right),
+                                //           ],
+                                //         )),
+                                //     Container(child: Row(
+                                //       children: [
+                                //         Text("${getEnquiryModel?.data?[index].description}"),
+                                //       ],
+                                //     )),
+                                //   ],
+                                // ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
-                // Card(
-                //   elevation: 5,
-                //   child: Container(
-                //     child: ListView.builder(
-                //       shrinkWrap: true,
-                //       padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                //       itemCount: myBookingModel?.data?.length,
-                //       itemBuilder: (context, index) {
-                //         return Container(
-                //           width: MediaQuery.of(context).size.width,
-                //           height: MediaQuery.of(context).size.height * 0.2,
-                //           decoration: BoxDecoration(
-                //             borderRadius: BorderRadius.circular(2),
-                //             color: Colors.white,
-                //           ),
-                //           child: Row(
-                //             crossAxisAlignment: CrossAxisAlignment.end,
-                //             children: [
-                //               Expanded(
-                //                 flex: 2,
-                //                 child: Container(
-                //                     padding: EdgeInsets.all(5),
-                //                     decoration: BoxDecoration(
-                //                       borderRadius: BorderRadius.circular(10),
-                //                     ),
-                //                     child: ClipRRect(
-                //                         borderRadius: BorderRadius.circular(9),
-                //                         child: Image.network(
-                //                           "${myBookingModel?.data?[index].image}",
-                //                           fit: BoxFit.fill,
-                //                         ),
-                //                     ),
-                //                 ),
-                //               ),
-                //               Expanded(
-                //                 flex: 5,
-                //                 child: Padding(
-                //                   padding: const EdgeInsets.only(left: 5),
-                //                   child: Column(
-                //                     mainAxisAlignment: MainAxisAlignment.center,
-                //                     crossAxisAlignment: CrossAxisAlignment.start,
-                //                     children: [
-                //                       Row(children: [
-                //                         const Text("Doctor Name: ", style: TextStyle(
-                //                             fontSize: 14,
-                //                             fontWeight: FontWeight.bold)),
-                //                         Text(
-                //                           "${myBookingModel?.data?[index].doctorName}",
-                //                           style: const TextStyle(
-                //                               fontSize: 12,
-                //                               fontWeight: FontWeight.w400),
-                //                         ),
-                //                       ],),
-                //                       const SizedBox(
-                //                         height: 5,
-                //                       ),
-                //                     Row(
-                //                       children: [
-                //                       const Text("Pet Type: ", style: TextStyle(
-                //                           fontSize: 14,
-                //                           fontWeight: FontWeight.bold)),
-                //                       Text(
-                //                         "${myBookingModel?.data?[index].petType}",
-                //                         style: const TextStyle(
-                //                             fontSize: 12,
-                //                             fontWeight: FontWeight.w400),
-                //                       ),
-                //                     ],
-                //                     ),
-                //                       const SizedBox(
-                //                         height: 5,
-                //                       ),
-                //                       Row(
-                //                         children: [
-                //                           const Text("Pet Name: ", style: TextStyle(
-                //                               fontSize: 14,
-                //                               fontWeight: FontWeight.bold),
-                //                           ),
-                //                           Text(
-                //                             "${myBookingModel?.data?[index].petName}",
-                //                             style: const TextStyle(
-                //                                 fontSize: 12,
-                //                                 fontWeight: FontWeight.w400),
-                //                           ),
-                //                         ],
-                //                       ),
-                //                       const SizedBox(
-                //                         height: 5,
-                //                       ),
-                //                       Row(
-                //                         children: [
-                //                           const Text("Date Time: ", style: TextStyle(
-                //                               fontSize: 14,
-                //                               fontWeight: FontWeight.bold),
-                //                           ),
-                //                           Text(
-                //                             "${myBookingModel?.data?[index].date} ${myBookingModel?.data?[index].timeSlot}",
-                //                             style: const TextStyle(
-                //                                 fontSize: 12,
-                //                                 fontWeight:FontWeight.w400),
-                //                           ),
-                //                         ],
-                //                       ),
-                //                       const SizedBox(
-                //                         height: 5,
-                //                       ),
-                //                       Row(
-                //                         children: [
-                //                           const Text("Payment Type: ", style: TextStyle(
-                //                               fontSize: 14,
-                //                               fontWeight: FontWeight.bold),
-                //                           ),
-                //                           Container(
-                //                             height: 25,
-                //                             width: 80,
-                //                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: colors.primary),
-                //                             child: Center(
-                //                               child: Text(
-                //                                 "${myBookingModel?.data?[index].paymentType}",
-                //                                 style: const TextStyle(
-                //                                     fontSize: 12,
-                //                                     color: colors.white,
-                //                                     fontWeight:FontWeight.w400),
-                //                               ),
-                //                             ),
-                //                           ),
-                //                         ],
-                //                       ),
-                //                     ],
-                //                   ),
-                //                 ),
-                //               ),
-                //
-                //             ],
-                //           ),
-                //         );
-                //       },
-                //     ),
-                //   ),
-                // ),
               ),
             ),
           ],
         ),
     );
-
   }
 }

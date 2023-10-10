@@ -48,7 +48,7 @@ class _FaqScreenState extends State<FaqScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:colors.white,
+      backgroundColor: Color(0xfff5f6fb),
       appBar: AppBar(
         leading: InkWell(
           onTap: () {
@@ -58,12 +58,12 @@ class _FaqScreenState extends State<FaqScreen> {
         elevation: 0,
         backgroundColor: colors.white,
         centerTitle: true,
-        title: const Text("Faqs", style: TextStyle(fontSize: 18, color: colors.black), ),),
+        title: const Text("Faqs", style: TextStyle(fontSize: 15, color: colors.black,fontFamily: "Montserrat"), ),),
       body: SingleChildScrollView(
         child:  Column(
           children: [
             ListView.builder(
-              itemCount: faqModel?.data?.length,
+              itemCount: faqModel?.data?.length ?? 0,
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
@@ -83,7 +83,7 @@ class _FaqScreenState extends State<FaqScreen> {
                                     faqModel?.data?[index].question ?? "",
                                     style: const TextStyle(
                                         color: Colors.black,
-                                      fontWeight: FontWeight.w500
+                                      fontWeight: FontWeight.w500,fontFamily: "Montserrat"
                                     ),
                                   ),
                               ),
@@ -99,7 +99,7 @@ class _FaqScreenState extends State<FaqScreen> {
                                             child: Text(
                                               faqModel?.data?[index].answer ?? "",
                                               style: const TextStyle(
-                                                  color: Colors.black
+                                                  color: Colors.black, fontFamily: "Montserrat"
                                               ),
                                             ),
                                         ),

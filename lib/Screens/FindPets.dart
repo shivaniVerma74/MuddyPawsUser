@@ -5,6 +5,7 @@ import 'BottomNavigationScreens/Account.dart';
 import 'BottomNavigationScreens/PetCareScreen.dart';
 import 'BottomNavigationScreens/StoreScreen.dart';
 import 'MyAppointmentsUser.dart';
+import 'PetsHistory.dart';
 
 class FindPetStuff extends StatefulWidget {
   const FindPetStuff({Key? key}) : super(key: key);
@@ -16,8 +17,10 @@ class FindPetStuff extends StatefulWidget {
 class _FindPetStuffState extends State<FindPetStuff> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
-      Store(),
-    PetCare(),
+    Store(),
+    PetsHistory(),
+    // PetCare(),
+    MyAppointment(),
     // MyAppointment(),
     // PetCare(),
     Account(),
@@ -40,16 +43,16 @@ class _FindPetStuffState extends State<FindPetStuff> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.medical_information),
-            label: 'Store',
+            label: 'Health Care',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.pets),
-            label: 'Pet Care',
+            label: 'Pet History',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.calendar_today),
-          //   label: 'Appointments',
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: 'Appointments',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Account',

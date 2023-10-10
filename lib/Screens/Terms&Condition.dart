@@ -57,7 +57,7 @@ class _TermsState extends State<Terms> {
     return RefreshIndicator(
       onRefresh: _refresh,
       child: Scaffold(
-        backgroundColor: colors.white,
+        backgroundColor: Color(0xfff5f6fb),
         appBar: AppBar(
           elevation: 0,
           leading: InkWell(
@@ -67,11 +67,11 @@ class _TermsState extends State<Terms> {
               child: const Icon(Icons.arrow_back_ios, color: colors.black)),
           backgroundColor: colors.white,
           centerTitle: true,
-          title: Text("Terms & Condition", style: TextStyle(fontWeight: FontWeight.w600, color: colors.black),),
+          title: const Text("Terms & Condition", style: TextStyle(fontWeight: FontWeight.w600, color: colors.black, fontFamily: "Montserrat"),),
         ),
         body: ListView(
           children: [
-            termsConditions == null || termsConditions == "" ? Center(child: CircularProgressIndicator(color: colors.primary))
+            termsConditions == null || termsConditions == "" ? const Center(child: CircularProgressIndicator(color: colors.primary))
                 : Html(
                 data: termsConditions
             ),

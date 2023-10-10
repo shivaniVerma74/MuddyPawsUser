@@ -14,6 +14,7 @@ class _SupportState extends State<Support> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff5f6fb),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 12, right: 12),

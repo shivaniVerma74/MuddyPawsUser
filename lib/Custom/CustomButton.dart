@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Colors.dart';
+
 class CustomButton extends StatefulWidget {
   final String name;
   const CustomButton({Key? key,required this.name}) : super(key: key);
@@ -16,7 +18,7 @@ class _CustomButtonState extends State<CustomButton> {
       width: MediaQuery.of(context).size.width / 1,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Colors.blue,
+        color: colors.primary,
       ),
       child: Center(
           child: Text(
@@ -24,7 +26,8 @@ class _CustomButtonState extends State<CustomButton> {
             style: const TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.w500,
-                color: Colors.white),
+                color: Colors.white,
+                fontFamily: "Montserrat"),
           ),
       ),
     );

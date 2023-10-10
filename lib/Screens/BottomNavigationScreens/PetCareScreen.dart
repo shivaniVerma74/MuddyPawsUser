@@ -78,7 +78,7 @@ class _PetCareState extends State<PetCare> {
     if (response.statusCode == 200) {
       var finalResponse = await response.stream.bytesToString();
       final jsonresponse = json.decode(finalResponse);
-      Navigator.push(context, MaterialPageRoute(builder: (context) =>  FindPetStuff()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>  const FindPetStuff()));
     }
     else {
       print(response.reasonPhrase);
@@ -89,12 +89,14 @@ class _PetCareState extends State<PetCare> {
   var items = [
     'Dog',
     'Cat',
+    'Others'
   ];
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Center(
+    return Material(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -107,9 +109,9 @@ class _PetCareState extends State<PetCare> {
                   children: [
                     const Center(
                       child: Text(
-                        "Pets",
+                        "Pets Profile",
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                            fontSize: 18, fontWeight: FontWeight.bold, fontFamily: "Montserrat"),
                       ),
                     ),
                     SizedBox(
@@ -129,7 +131,7 @@ class _PetCareState extends State<PetCare> {
                  const Text(
                    "Pet Name",
                    style: TextStyle(
-                       fontSize: 14, fontWeight: FontWeight.w600),
+                       fontSize: 14, fontWeight: FontWeight.w600, fontFamily: "Montserrat"),
                  ),
                  SizedBox(
                    height: MediaQuery.of(context).size.height * .01,
@@ -142,7 +144,8 @@ class _PetCareState extends State<PetCare> {
                        ),
                        counterText: "",
                        hintText: 'Pet Name',
-                       hintStyle: TextStyle(fontSize: 13),
+
+                       hintStyle: TextStyle(fontSize: 13, fontFamily: "Montserrat"),
                        contentPadding: EdgeInsets.only(left: 10)
                    ),
                    validator: (v) {
@@ -157,12 +160,13 @@ class _PetCareState extends State<PetCare> {
                    const Text(
                      "Pet Age",
                      style: TextStyle(
-                         fontSize: 14, fontWeight: FontWeight.w600),
+                         fontSize: 14, fontWeight: FontWeight.w600,fontFamily: "Montserrat"),
                    ),
                    SizedBox(
                      height: MediaQuery.of(context).size.height * .01,
                    ),
                    TextFormField(
+                     keyboardType: TextInputType.number,
                      controller: ageCtr,
                      decoration: InputDecoration(
                          border: OutlineInputBorder(
@@ -170,7 +174,7 @@ class _PetCareState extends State<PetCare> {
                          ),
                          counterText: "",
                          hintText: 'Pet Age',
-                         hintStyle: TextStyle(fontSize: 13),
+                         hintStyle: TextStyle(fontSize: 13, fontFamily: "Montserrat"),
                          contentPadding: EdgeInsets.only(left: 10)
                      ),
                      validator: (v) {
@@ -185,7 +189,7 @@ class _PetCareState extends State<PetCare> {
                    const Text(
                      "Pet Type",
                      style: TextStyle(
-                         fontSize: 14, fontWeight: FontWeight.w600),
+                         fontSize: 14, fontWeight: FontWeight.w600, fontFamily: "Montserrat"),
                    ),
                    SizedBox(
                      height: MediaQuery.of(context).size.height * .01,
@@ -234,7 +238,7 @@ class _PetCareState extends State<PetCare> {
                          items: items.map((String items) {
                            return DropdownMenuItem(
                              value: items,
-                             child: Text(items),
+                             child: Text(items, style: TextStyle(fontFamily: "Montserrat"),),
                            );
                          }).toList(),
                          // After selecting the desired option,it will
@@ -247,7 +251,6 @@ class _PetCareState extends State<PetCare> {
                        ),
                      ),
                    ),
-
                    SizedBox(
                      height: MediaQuery.of(context).size.height *.02,
                    ),
@@ -256,7 +259,7 @@ class _PetCareState extends State<PetCare> {
                      onPressed: () {
                        showExitPopup();
                      },
-                     child: const Text("Upload Pet Image"),
+                     child: const Text("Upload your Pet's photo", style: TextStyle(fontFamily: "Montserrat"),),
                    ),
                    SizedBox(height: 10),
                    imageFile == null ? SizedBox.shrink():InkWell(
@@ -282,11 +285,12 @@ class _PetCareState extends State<PetCare> {
                          height: 40,
                          width: MediaQuery.of(context).size.width/1.5,
                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: colors.primary),
-                           child: Center(child: const Text("Create Profile", style: TextStyle(color: colors.white, fontSize: 15, fontWeight: FontWeight.w600),))),
+                           child: const Center(child: Text("Create Profile", style: TextStyle(color: colors.white, fontSize: 15, fontWeight: FontWeight.w600, fontFamily: "Montserrat"),))),
                      ),
                    ),
-                   SizedBox(height: 20,)
-               ],),
+                   const SizedBox(height: 20)
+               ],
+               ),
              ),
            ),
           ],
@@ -294,6 +298,7 @@ class _PetCareState extends State<PetCare> {
       ),
     );
   }
+
   File? imageFile;
   _getFromGallery() async {
     PickedFile? pickedFile = await ImagePicker().getImage(

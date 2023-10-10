@@ -78,12 +78,12 @@ class _SearchScreenState extends State<SearchScreen> {
                     },
                     itemBuilder: (context, index) {
                       return InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => DoctorDetails()),
-                         );
-                        },
+                        // onTap: () {
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (context) => DoctorDetails()),
+                        //  );
+                        // },
                         child: Container(
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height * 0.1,

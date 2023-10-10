@@ -30,6 +30,7 @@ class _WalletScreenState extends State<WalletScreen> {
     _razorpay?.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay?.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay?.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    walletTransactions();
   }
 
   String? wallet_balance;
@@ -287,18 +288,18 @@ class _WalletScreenState extends State<WalletScreen> {
                   // Image.asset('assets/images/transactions.png', height: 50, width: 50,),
                   // SizedBox(width: 15,),
                   SizedBox(
-                    width: 200,
+                    width: 250,
                     child: Text(
-                      "${transactionModel?.data?[index].message.toString()}",
+                      "${transactionModel?.data?[index].username}",
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(color: colors.black, fontWeight: FontWeight.normal, fontSize: 14),
                     ),
                   ),
-                  SizedBox(width: 5,),
+                  SizedBox(width: 10),
                   Text(
                       "₹ ${transactionModel?.data?[index].amount}",
-                    style: TextStyle(color: colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+                    style: const TextStyle(color: colors.black, fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ],
               ),
@@ -350,7 +351,7 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor:  Color(0xfff5f6fb),
         body: SingleChildScrollView(
           child: SafeArea(
             child: Column(
@@ -414,27 +415,26 @@ class _WalletScreenState extends State<WalletScreen> {
                 ),
             ],
             ),
-          // SizedBox(height: 10,),
-          //  Padding(
-          //    padding: const EdgeInsets.only(left: 10),
-          //    child: Text("Wallet Transaction", style: TextStyle(fontSize: 15, color: colors.black, fontWeight: FontWeight.w500),),
-          //  ),
-          // SizedBox(height: 20,),
-          //    // transactionModel?.responseCode == "0"
-          //    //     ? const Center(
-          //    //   child: Text(
-          //    //     "No Item", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
-          //    //   ),
-          //    // )
-          //    //     :
-          //    ListView.builder(
-          //      shrinkWrap: true,
-          //      itemCount:  transactionModel?.data?.length,
-          //      physics: NeverScrollableScrollPhysics(),
-          //      itemBuilder: (context, index) {
-          //        return listItem(index);
-          //      },
-          //    ),
+          SizedBox(height: 10,),
+           Padding(
+             padding: const EdgeInsets.only(left: 10),
+             child: Text("Wallet Transaction", style: TextStyle(fontSize: 15, color: colors.black, fontWeight: FontWeight.w500),),
+           ),
+          SizedBox(height: 20,),
+             transactionModel?.responseCode == "0"
+                 ? const Center(
+               child: Text(
+                 "No Transaction", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
+               ),
+             ):
+             ListView.builder(
+               shrinkWrap: true,
+               itemCount:  transactionModel?.data?.length ?? 0,
+               physics: NeverScrollableScrollPhysics(),
+               itemBuilder: (context, index) {
+                 return listItem(index);
+               },
+             ),
       ],
     ))),
     );

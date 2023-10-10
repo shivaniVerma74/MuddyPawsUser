@@ -9,18 +9,24 @@ import 'package:intl/intl.dart';
 import 'package:muddypawsuser/Api.path.dart';
 import 'package:muddypawsuser/Models/GetPetsModel.dart';
 import 'package:muddypawsuser/Models/GetPlansModel.dart';
+import 'package:muddypawsuser/Screens/FindPets.dart';
+import 'package:muddypawsuser/Screens/MyAppointmentsUser.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Colors.dart';
 import 'package:http/http.dart'  as http;
 
 import '../Models/GetTimeSlot.dart';
+import 'Auth/VerifyOtp.dart';
 import 'BottomNavigationScreens/StoreScreen.dart';
 
 class DactorBooking extends StatefulWidget {
   final id;
   String? fees;
-   DactorBooking({Key? key, this.id, this.fees}) : super(key: key);
+var pettName;
+var petTypee;
+var petIdd;
+   DactorBooking({Key? key, this.id, this.fees, this.pettName,this.petTypee,this.petIdd}) : super(key: key);
 
   @override
   State<DactorBooking> createState() => _DactorBookingState();
@@ -28,10 +34,29 @@ class DactorBooking extends StatefulWidget {
 
 class _DactorBookingState extends State<DactorBooking> {
 
+  initState() {
+    super.initState();
+    print("pet name hererer ${widget.petTypee}");
+    print("pet type hererer ${widget.pettName}");
+    print("pet idd hererer ${widget.petIdd}");
+    userName();
+    userMobile();
+    petName();
+    petType();
+    getPets();
+    getSubscription();
+    _razorpay = Razorpay();
+    _razorpay?.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay?.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay?.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    // getTimeSlot();
+  }
+
+
   TextEditingController namecn = TextEditingController();
-  TextEditingController emailcn = TextEditingController();
+  TextEditingController petTypeCtr = TextEditingController();
   TextEditingController mobilecn = TextEditingController();
-  TextEditingController eventcn = TextEditingController();
+  TextEditingController petCtr = TextEditingController();
   TextEditingController addresscn = TextEditingController();
   TextEditingController descriptioncn = TextEditingController();
   TextEditingController gstCtr = TextEditingController();
@@ -42,6 +67,7 @@ class _DactorBookingState extends State<DactorBooking> {
 
   File? imageFile;
   File? petImage;
+
   _getFromGallery() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
@@ -65,7 +91,6 @@ class _DactorBookingState extends State<DactorBooking> {
       Navigator.pop(context);
     }
   }
-
 
   _getFromGallery1() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
@@ -209,19 +234,6 @@ class _DactorBookingState extends State<DactorBooking> {
     }
   }
 
-
-  initState() {
-    super.initState();
-    print("feessss ${widget.fees}");
-    getPets();
-    getSubscription();
-    _razorpay = Razorpay();
-    _razorpay?.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-    _razorpay?.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-    _razorpay?.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-    // getTimeSlot();
-  }
-
   String? selected_pets;
   bool isLoading = true;
 
@@ -263,8 +275,8 @@ class _DactorBookingState extends State<DactorBooking> {
     };
     var request = http.MultipartRequest('POST', Uri.parse(ApiServicves.getTimeSlot));
     request.fields.addAll({
-      'user_id': '${userId}',
-      'date': '${startDateController.text}'
+      'user_id': '$userId',
+      'date': startDateController.text
     });
     print("get time slot paarar ${request.fields}");
     request.headers.addAll(headers);
@@ -293,19 +305,19 @@ class _DactorBookingState extends State<DactorBooking> {
     };
     var request = http.MultipartRequest('POST', Uri.parse(ApiServicves.bookAppointment));
     request.fields.addAll({
-      'user_id': '${userId}',
-      'pet_id': dropdownvalue,
+      'user_id': '$userId',
+      'pet_id': widget.petIdd,
       'doctor_id': '${widget.id}',
-      'description': '${descriptioncn.text}',
-      'date': "${startDateController.text}",
+      'description': descriptioncn.text,
+      'date': startDateController.text,
       'time': selectedTime.toString(),
       'transaction_id': 'TXN1235455555',
       'payment_type': "online",
       'amount': "${widget.fees}"
     });
     print("bookinggg api parameter ${request.fields}");
-    request.files.add(await http.MultipartFile.fromPath('report_image', imageFile!.path.toString()));
-    request.files.add(await http.MultipartFile.fromPath('pet_image', petImage!.path.toString()));
+    request.files.add(await http.MultipartFile.fromPath('report_image', userImage!.path.toString()));
+    request.files.add(await http.MultipartFile.fromPath('pet_image', petsImage!.path.toString()));
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
@@ -313,7 +325,7 @@ class _DactorBookingState extends State<DactorBooking> {
       final jsonresponse = json.decode(finalResponse);
       Fluttertoast.showToast(msg: "Booking Successfully");
       //
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => Store()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => MyAppointment()));
     }
     else {
       print(response.reasonPhrase);
@@ -327,6 +339,7 @@ class _DactorBookingState extends State<DactorBooking> {
   String? selectedOnlinePayment = '';
   String _dateValue = '';
   var dateFormate;
+
   String convertDateTimeDisplay(String date) {
     final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
     final DateFormat serverFormater = DateFormat('yyyy-MM-dd');
@@ -363,6 +376,28 @@ class _DactorBookingState extends State<DactorBooking> {
     getTimeSlot();
   }
 
+  userName() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    user_name = preferences.getString('user_name');
+    namecn.text = user_name.toString();
+    print("userr nameee isss $user_name");
+  }
+
+ userMobile() async {
+   SharedPreferences preferences = await SharedPreferences.getInstance();
+   user_mobile = preferences.getString('user_mobile');
+   print("userr nameee isss $user_mobile");
+   mobilecn.text = user_mobile.toString();
+ }
+
+ petName() async {
+     petCtr.text = widget.pettName.toString();
+ }
+
+ petType() async {
+    petTypeCtr.text = widget.petTypee.toString();
+
+ }
 
   String dropdownvalue = "Dog";
   var items = [
@@ -387,11 +422,14 @@ class _DactorBookingState extends State<DactorBooking> {
   Razorpay? _razorpay;
   int? pricerazorpayy;
   void openCheckout(amount) async {
-    String res = amount.toString();
+    double res = double.parse(amount.toString());
+    pricerazorpayy= int.parse(res.toStringAsFixed(0)) * 100;
+    print("checking razorpay price ${pricerazorpayy.toString()}");
+    print("aaaaaaaaaaaaaa${amount}");
     // Navigator.of(context).pop();
     var options = {
       'key': 'rzp_test_1DP5mmOlF5G5ag',
-      'amount': "${amount}",
+      'amount': pricerazorpayy,
       'name': 'Muddy',
       'image':'assets/images/Group 165.png',
       'description': 'Muddy',
@@ -403,22 +441,139 @@ class _DactorBookingState extends State<DactorBooking> {
     }
   }
 
+File? petsImage;
+  File? userImage;
+  Future<void> pickImage(ImageSource source, String type) async {
+    final pickedFile = await ImagePicker().pickImage(
+      source: source,
+      maxHeight: 100,
+      maxWidth: 100,
+      imageQuality: 50, // You can adjust the image quality here
+    );
+    if (pickedFile != null) {
+      setState(() {
+        if (type == 'userImage') {
+          userImage = File(pickedFile.path);
+        } else if (type == 'petsImage') {
+          petsImage = File(pickedFile.path);
+        }
+      });
+    }
+  }
+
+
+  showAlertDialog(BuildContext context, String type) {
+    AlertDialog alert = AlertDialog(
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 25),
+          child: Container(
+            height: 250,
+            color: Colors.transparent, //could change this to Color(0xFF737373),
+            //so you don't have to change MaterialApp canvasColor
+            child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:  BorderRadius.only(
+                        topLeft: const Radius.circular(10.0),
+                        topRight: const Radius.circular(10.0))),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 5,
+                      width: 150,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(75),
+                          color: Colors.grey),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Select Any One Option',
+                      style: TextStyle(
+                          fontSize: 17,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        print(type);
+                        Navigator.of(context).pop();
+                        // pickImage(ImageSource.gallery, type);
+                        pickImage(ImageSource.gallery, type);
+                      },
+                      child: Card(
+                        elevation: 5,
+                        child: Container(
+                          width: 200,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Center(child: Text('Select From Gallery')),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        print(type);
+                        Navigator.of(context).pop();
+                        pickImage(ImageSource.camera, type);
+                      },
+                      child: Card(
+                        elevation: 5,
+                        child: Container(
+                          width: 200,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Center(child: Text('Select From Camera')),
+                        ),
+                      ),
+                    )
+                  ],
+                )),
+          ),
+        ),
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colors.white,
+      backgroundColor: Color(0xfff5f6fb),
       appBar: AppBar(
         leading: InkWell(
             onTap: () {
               Navigator.pop(context);
             },
-            child: const Icon(Icons.arrow_back_ios, color: colors.black)),
+            child: const Icon(Icons.arrow_back_ios, color: colors.black),
+        ),
         elevation: 0,
         centerTitle: true,
         backgroundColor: colors.white,
-        title: const Text("Booking", style: TextStyle(fontSize: 18, color: colors.black, fontWeight: FontWeight.w500),),
+        title: const Text("Booking Appointment", style: TextStyle(fontSize: 15, color: colors.black, fontWeight: FontWeight.w500, fontFamily: "Montserrat")),
       ),
-      body: SingleChildScrollView(
+      body:
+      SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
           child: Column(
@@ -432,26 +587,32 @@ class _DactorBookingState extends State<DactorBooking> {
                     const Text(
                       "Name",
                       style: TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.bold),
+                          fontSize: 14, fontWeight: FontWeight.bold, fontFamily: "Montserrat"),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * .01,
+                      height: MediaQuery.of(context).size.height *.01,
                     ),
                     Container(
                       height: 50,
                       child: TextFormField(
+                          readOnly: true,
                           keyboardType: TextInputType.text,
                           controller: namecn,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please Enter Your Name';
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value!.isEmpty) {
+                          //     return 'Please Enter Your Name';
+                          //   }
+                          //   return null;
+                          // },
                           decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top: 17, left: 9),
                               hintText: '',
+                              hintStyle: TextStyle(fontFamily: "Montserrat"),
                               border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)))),
+                                  borderRadius: BorderRadius.circular(10),
+                              ),
+                          ),
+                      ),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .01,
@@ -483,7 +644,7 @@ class _DactorBookingState extends State<DactorBooking> {
                     const Text(
                       "Mobile",
                       style: TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.bold),
+                          fontSize: 14, fontWeight: FontWeight.bold,fontFamily: "Montserrat"),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .01,
@@ -492,123 +653,104 @@ class _DactorBookingState extends State<DactorBooking> {
                       height: 50,
                       child: TextFormField(
                           keyboardType: TextInputType.number,
-                          maxLength: 10,
+                          // maxLength: 10,
                           controller: mobilecn,
-                          validator: (value) {
-                            if (value!.isEmpty || value.length < 10) {
-                              return 'Please Enter Your Mobile No';
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value!.isEmpty || value.length < 10) {
+                          //     return 'Please Enter Your Mobile No';
+                          //   }
+                          //   return null;
+                          // },
                           decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top: 19, left: 9),
                               hintText: '',
                               counterText: "",
                               border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15)))),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * .01,
-                    ),
-                    // const Text(
-                    //   "Service Name",
-                    //   style: TextStyle(
-                    //       fontSize: 14, fontWeight: FontWeight.bold),
-                    // ),
-                    // SizedBox(
-                    //   height: MediaQuery.of(context).size.height * .02,
-                    // ),
-                    // TextFormField(
-                    //     keyboardType: TextInputType.text,
-                    //     controller: eventcn,
-                    //     validator: (value) {
-                    //       if (value!.isEmpty) {
-                    //         return 'Please Enter Your Event';
-                    //       }
-                    //       return null;
-                    //     },
-                    //     decoration: InputDecoration(
-                    //         hintText: '',
-                    //         border: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(15)))),
-                    // SizedBox(
-                    //   height: MediaQuery.of(context).size.height * .02,
-                    // ),
-                    const Text(
-                      "Pets",
-                      style: TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * .01,
-                    ),
-                    // Container(
-                    //   height: 60,
-                    //   child: DropdownButtonFormField<String>(
-                    //     value: selected_pets,
-                    //     validator: (value) {
-                    //       if (value == null || value.isEmpty) {
-                    //         return 'Please Select Pets';
-                    //       } else {
-                    //         return null;
-                    //       }
-                    //     },
-                    //     onChanged: (newValue) {
-                    //       setState(() {
-                    //         selected_pets = newValue;
-                    //       });
-                    //     },
-                    //     items: getpetsmodel?.data?.map((items) {
-                    //       return DropdownMenuItem(
-                    //         value: items.id.toString(),
-                    //         child: Text(items.username.toString()),
-                    //       );
-                    //     }).toList(),
-                    //     decoration: InputDecoration(
-                    //         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                    //         hintText: 'Select Pets',
-                    //         label: Text('Select Pets',)
-                    //     ),
-                    //   ),
-                    // ),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: colors.black.withOpacity(0.4))
-                      ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                          isExpanded: true,
-                          value: dropdownvalue,
-                          hint: Icon(Icons.arrow_drop_down_outlined),
-                          items: items.map((String items) {
-                            return DropdownMenuItem(
-                              value: items,
-                              child: Text(items),
-                            );
-                          }).toList(),
-                          // After selecting the desired option,it will
-                          // change button value to selected value
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              dropdownvalue = newValue!;
-                            });
-                          },
-                        ),
+                                  borderRadius: BorderRadius.circular(10),),),
                       ),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .01,
                     ),
                     const Text(
-                      "Description",
+                      "Pet Type",
                       style: TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.bold),
+                          fontSize: 14, fontWeight: FontWeight.bold,fontFamily: "Montserrat"),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .01,
                     ),
                     Container(
                       height: 50,
+                      child: TextFormField(
+                        textAlign: TextAlign.left,
+                        readOnly: true,
+                          keyboardType: TextInputType.number,
+                          maxLength: 10,
+                          controller: petTypeCtr,
+                          // validator: (value) {
+                          //   if (value!.isEmpty || value.length < 10) {
+                          //     return 'Please Enter Your Mobile No';
+                          //   }
+                          //   return null;
+                          // },
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top: 19, left: 9),
+                              hintText: '',
+                              counterText: "",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                              ),
+                          ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height*.01,
+                    ),
+                    const Text(
+                      "Pet Name",
+                      style: TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.bold, fontFamily: "Montserrat"),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height*.01,
+                    ),
+                    Container(
+                      height: 50,
+                      child: TextFormField(
+                        readOnly: true,
+                          keyboardType: TextInputType.number,
+                          maxLength: 10,
+                          controller: petCtr,
+                          // validator: (value) {
+                          //   if (value!.isEmpty || value.length < 10) {
+                          //     return 'Please Enter Your Mobile No';
+                          //   }
+                          //   return null;
+                          // },
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(top: 19, left: 9),
+                              hintText: '',
+                              counterText: "",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)))),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .01,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .01,
+                    ),
+                    const Text(
+                      "Reason For Consultation",
+                      style: TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.bold, fontFamily: "Montserrat"),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .01,
+                    ),
+                    Container(
+                      height: 65,
                       child: TextFormField(
                           keyboardType: TextInputType.text,
                           controller: descriptioncn,
@@ -619,6 +761,7 @@ class _DactorBookingState extends State<DactorBooking> {
                             return null;
                           },
                           decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(top: 19, left: 9),
                               hintText: '',
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)))),
@@ -629,7 +772,7 @@ class _DactorBookingState extends State<DactorBooking> {
                     const Text(
                       "Date",
                       style: TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.bold),
+                          fontSize: 14, fontWeight: FontWeight.bold, fontFamily: "Montserrat"),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .01,
@@ -645,7 +788,8 @@ class _DactorBookingState extends State<DactorBooking> {
                           ),
                           counterText: "",
                           hintText: 'Select Date',
-                          contentPadding: EdgeInsets.only(left: 10)
+                          hintStyle: const TextStyle(fontFamily: "Montserrat"),
+                        contentPadding: const EdgeInsets.only(top: 19, left: 9),
                       ),
                       validator: (v) {
                         if (v!.isEmpty) {
@@ -654,17 +798,17 @@ class _DactorBookingState extends State<DactorBooking> {
                       },
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * .01,
+                      height: MediaQuery.of(context).size.height*.01,
                     ),
-                    const Text("Booking Time", style: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.bold)),
-                    SizedBox(height: 10),
+                    const Text("Select Time Slot", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, fontFamily: "Montserrat"),
+                    ),
+                    const SizedBox(height: 10),
                      Container(
                       height: 50,
                       child: getTimeslot?.data != null || getTimeslot?.data != "" ? ListView.builder(
                         itemCount: getTimeslot?.data?.length ?? 0,
                           shrinkWrap: true,
-                          physics: ScrollPhysics(),
+                          physics: const ScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                         return InkWell(
@@ -678,7 +822,7 @@ class _DactorBookingState extends State<DactorBooking> {
                           child: Container(
                             decoration: BoxDecoration(
                               color: selectedTimeIndex == index ? colors.primary: colors.white,
-                                border: Border.all(color: Colors.red),
+                                border: Border.all(color: colors.primary),
                                 borderRadius: BorderRadius.circular(10),
                             ),
                             height: 40,
@@ -686,7 +830,7 @@ class _DactorBookingState extends State<DactorBooking> {
                             child: Center(
                               child: Text("${getTimeslot?.data?[index].time}",
                               style:  TextStyle(
-                                  fontWeight: FontWeight.w600,fontSize:11,
+                                  fontWeight: FontWeight.w600, fontSize:11,
                                   color: selectedTimeIndex == index ? colors.white: colors.primary,
                               ),
                             ),
@@ -699,7 +843,7 @@ class _DactorBookingState extends State<DactorBooking> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .01,
                     ),
-                 //    const Text("Select Payment", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    //    const Text("Select Payment", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                  //    ),
                  // Column(
                  //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -787,20 +931,21 @@ class _DactorBookingState extends State<DactorBooking> {
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: colors.primary),
                         onPressed: () {
-                         showExitPopup();
+                          showAlertDialog(context, "userImage");
+                         // showExitPopup();
                         },
-                        child: const Text("Upload Report"),
+                        child: const Text("Upload Documents", style: TextStyle(fontSize: 15,fontFamily: "Montserrat")),
                     ),
-                    SizedBox(height: 10),
-                    imageFile == null ? SizedBox.shrink():InkWell(
+                    const SizedBox(height: 10),
+                    userImage == null ? const SizedBox.shrink(): InkWell(
                       onTap: () {
-                        showExitPopup();
+                        showAlertDialog(context, "userImage");
                       },
                       child: Container(
                         height: 100,
                         width: double.infinity,
                         margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                        child: Image.file(imageFile!,fit: BoxFit.fill,),
+                        child: Image.file(userImage!,fit: BoxFit.fill,),
                       ),
                     ),
                     SizedBox(
@@ -809,19 +954,19 @@ class _DactorBookingState extends State<DactorBooking> {
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: colors.primary),
                         onPressed: () {
-                          showExitPopup1();
+                          showAlertDialog(context, "petsImage");
                         },
-                        child: const Text("Upload Pet Image")),
+                        child: const Text("Upload Pet's Image", style: TextStyle(fontSize: 15, fontFamily: "Montserrat"),)),
                     SizedBox(height: 10,),
-                    petImage == null ? SizedBox.shrink() :  InkWell(
-                      onTap: (){
-                        showExitPopup1();
+                    petsImage == null ? SizedBox.shrink() :  InkWell(
+                      onTap: () {
+                        showAlertDialog(context, "petsImage");
                       },
                       child: Container(
                         height: 100,
                         width: double.infinity,
                         margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                        child: Image.file(petImage!,fit: BoxFit.fill,),
+                        child: Image.file(petsImage!,fit: BoxFit.fill,),
                       ),
                     ),
                     SizedBox(
@@ -837,6 +982,7 @@ class _DactorBookingState extends State<DactorBooking> {
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
                     // bookAppoinmtment();
+                    // String? amount = (widget.fees * 100);
                     openCheckout(widget.fees);
                     print("amounttttttttt ${widget.fees}");
                   }
@@ -849,7 +995,8 @@ class _DactorBookingState extends State<DactorBooking> {
                       height: 50,
                       width: MediaQuery.of(context).size.width/1.2,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: colors.primary),
-                      child: const Center(child: Text("Book Appointment", style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.w400))),)
+                      child: const Center(
+                          child: Text("Book Appointment", style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.w400, fontFamily: "Montserrat"))),)
                   // ElevatedButton(
                   //    style: ElevatedButton.styleFrom(primary: Colors.redAccent),
                   //     onPressed: () {

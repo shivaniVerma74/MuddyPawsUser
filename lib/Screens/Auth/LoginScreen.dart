@@ -51,7 +51,9 @@ class _LoginState extends State<Login> {
                 builder: (context) => VerifyScreen(
                   OTP: otp,
                   MOBILE: mobile,
-                )));
+                ),
+            ),
+        );
       } else {
         Fluttertoast.showToast(msg: "${jsonresponse['message']}");
       }
@@ -83,10 +85,10 @@ class _LoginState extends State<Login> {
                   child: Image.asset('assets/images/Group 165.png'),
                 ),
               ),
-              const Text(
-                "Care Provider App",
-                style: TextStyle(fontSize: 15, color: Colors.grey),
-              ),
+              // const Text(
+              //   "Care Provider App",
+              //   style: TextStyle(fontSize: 15, color: Colors.grey),
+              // ),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 19,
               ),
@@ -98,23 +100,26 @@ class _LoginState extends State<Login> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 39,
               ),
-              Container(
-                height: MediaQuery.of(context).size.height/12.7,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),color: Colors.indigo[100]),
-                child: Center(
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    controller: mobileController,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Icon(Icons.call),
-                      hintText: "Mobile",
+              Card(
+                elevation: 3,
+                child: Container(
+                  height: MediaQuery.of(context).size.height/12.7,
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),),
+                  child: Center(
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      controller: mobileController,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        prefixIcon: Icon(Icons.call),
+                        hintText: "Mobile",
+                      ),
+                      validator: (v) {
+                        if (v!.length < 10) {
+                          return "Enter Valid Mobile Number";
+                        }
+                      },
                     ),
-                    validator: (v) {
-                      if (v!.length < 10) {
-                        return "Enter Valid Mobile Number";
-                      }
-                    },
                   ),
                 ),
               ),
@@ -202,16 +207,17 @@ class _LoginState extends State<Login> {
               // SizedBox(
               //   height: MediaQuery.of(context).size.height / 39,
               // ),
+              SizedBox(height: 10,),
               TextButton(
                   onPressed: () {
                     Navigator.pushNamed(context, "register");
                   },
                   child: const Text(
-                    "Skip Login",
+                    "Not a registered user? Register with us",
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: Colors.black),
+                        fontSize: 14,
+                        color: Colors.black, fontFamily: "Montserrat"),
                   ),
               ),
             ],
