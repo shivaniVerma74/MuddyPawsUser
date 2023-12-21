@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../Colors.dart';
 import '../Models/GetDoctorModel.dart';
@@ -28,6 +29,10 @@ class _DoctorDetailsState extends State<DoctorDetails> {
   List<PetsData> selectedPets = [];
   @override
   Widget build(BuildContext context) {
+     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xffFFFFFF), // navigation bar color
+    statusBarColor: Color(0xffFFFFFF), // status bar color
+  ));
     return Scaffold(
       backgroundColor: Color(0xfff5f6fb),
       appBar: AppBar(
@@ -48,42 +53,69 @@ class _DoctorDetailsState extends State<DoctorDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                color: Colors.white,
+                // color: Colors.white,
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height/55,
+                      height: MediaQuery.of(context).size.height/75,
                     ),
                     Row(
                       children: [
+                        widget.model?.image == null || widget.model?.image == ""
+                    ? Container(
+                    decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10)),
+                          height: 165,
+                          width: 150,
+                    child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(
+                      "assets/images/doctor2.jpg",
+                         fit: BoxFit.fill,
+                            ),
+                        ),
+                       ):
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          height: 150,
-                          width: 150,
-                          child:Image.network('${widget.model?.image}',fit: BoxFit.fill,) ,
+                          // height: 145,
+                          // width: 150,
+                          child:ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: Image.network('${widget.model?.image}',fit: BoxFit.fill, height: 130,
+                                width: 130,)),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 50),
+                          padding: const EdgeInsets.only(left: 50),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children:  [
-                              Text('Experience',style: TextStyle(color: Colors.grey,fontSize: 12, fontFamily: "Montserrat"),),
-                              SizedBox(height: 8),
-                              Text('${widget.model?.experience}',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500, fontFamily: "Montserrat"),),
-                              SizedBox(height: 20),
-                              Text('Consultancy fee',overflow:TextOverflow.ellipsis,style: TextStyle(color: Colors.grey,fontSize: 14, fontFamily: "Montserrat"),),
-                              SizedBox(height: 8),
-                              Text('${widget.model?.consultancyFees}',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500, fontFamily: "Montserrat")),
-                              SizedBox(height: 8),
-                              Text('Qualification',overflow:TextOverflow.ellipsis,style: TextStyle(color: Colors.grey,fontSize: 14, fontFamily: "Montserrat"),),
-                              SizedBox(height: 8),
-                              Text('${widget.model?.qualification}',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500, fontFamily: "Montserrat")),
-                              SizedBox(height: 8),
+                              const Text('Experience',style: TextStyle(color: Colors.grey,fontSize: 12, fontFamily: "Montserrat"),),
+                              const SizedBox(height: 8),
+                              Text( widget.model?.experience == "" || widget.model?.experience == null
+                                  ? "Not Avaliable":'${widget.model?.experience}s',style: const TextStyle(fontSize: 15,fontWeight: FontWeight.w500, fontFamily: "Montserrat"),),
+                              const SizedBox(height: 20),
+                              const Text('Fees',overflow:TextOverflow.ellipsis,style: TextStyle(color: Colors.grey,fontSize: 14, fontFamily: "Montserrat"),),
+                              const SizedBox(height: 8),
+                              Text(widget.model?.consultancyFees == "" || widget.model?.consultancyFees == null
+                                  ? "Not Avaliable":'${widget.model?.consultancyFees}',style: const TextStyle(fontSize: 15,fontWeight: FontWeight.w500, fontFamily: "Montserrat")),
+                              const SizedBox(height: 20),
+                              const Text('Qualification',overflow:TextOverflow.ellipsis,style: TextStyle(color: Colors.grey,fontSize: 14, fontFamily: "Montserrat"),),
+                              const SizedBox(height: 8),
+                              Text(widget.model?.qualification == "" || widget.model?.qualification == null
+                                  ? "Not Avaliable":'${widget.model?.qualification}',style: const TextStyle(fontSize: 15,fontWeight: FontWeight.w500, fontFamily: "Montserrat")),
+                              const SizedBox(height: 20),
+                                const Text('Clinic Name',overflow:TextOverflow.ellipsis,style: TextStyle(color: Colors.grey,fontSize: 14, fontFamily: "Montserrat"),),
+                              const SizedBox(height: 8),
+                              Container(
+                                width: 100,
+                                child: Text(widget.model?.clinicName == "" || widget.model?.clinicName == null
+                                    ? "Not Avaliable":'${widget.model?.clinicName}',style: const TextStyle(fontSize: 15,fontWeight: FontWeight.w500, fontFamily: "Montserrat"), overflow: TextOverflow.ellipsis,),
+                              ),
                               // Text('${widget.model?.}',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
                             ],
                           ),
@@ -96,14 +128,14 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                         Container(
                           width: 190,
                           padding: const EdgeInsets.all(10),
-                          child: Text('${widget.model?.username}', style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20, fontFamily: "Montserrat"),overflow: TextOverflow.ellipsis,),
+                          child: Text('${widget.model?.username}', style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 20, fontFamily: "Montserrat"),overflow: TextOverflow.ellipsis,),
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
                             Text('Rating',style: TextStyle(color: Colors.white,fontSize: 14, fontFamily: "Montserrat"),),
-                            SizedBox(height: 10,),
+                            SizedBox(height: 10),
                             // Row(
                             //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             //     crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,7 +168,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                   ],
                 ),
               ),
-              const SizedBox(height: 5,),
+              const SizedBox(height: 5),
               Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: Container(
@@ -149,26 +181,28 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                   ),
                 ),
               ),
-              const SizedBox(height: 5,),
+              const SizedBox(height: 5),
               Container(
+                width: MediaQuery.of(context).size.width,
                 color: Colors.white,
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('About',style: TextStyle(color: Colors.grey,fontSize: 15, fontFamily: "Montserrat"),),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10),
                     SizedBox(height:70,
-                      child: Text("${widget.model?.storeDescription}",style: TextStyle(fontFamily: "Montserrat"),overflow: TextOverflow.ellipsis,maxLines: 3,),
+                      child: widget.model?.storeDescription == null || widget.model?.storeDescription == "" ? const Text("Not Avaliable"):
+                      Text("${widget.model?.storeDescription}",style: const TextStyle(fontFamily: "Montserrat"),overflow: TextOverflow.ellipsis,maxLines: 3,),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10),
               Container(
                 color: Colors.white,
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -180,9 +214,9 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children:  [
-                            SizedBox(height: 15),
-                            Text('${widget.model?.clinicAddress}',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16, fontFamily: "Montserrat")),
+                          children: [
+                            const SizedBox(height: 15),
+                            Text('${widget.model?.clinicAddress}',style: const TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16, fontFamily: "Montserrat")),
                           ],
                         ),
                       ],

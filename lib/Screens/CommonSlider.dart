@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 class CommonSlider extends StatefulWidget {
@@ -39,6 +40,10 @@ class _CommonSliderState extends State<CommonSlider> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xffFFFFFF), // navigation bar color
+    statusBarColor: Color(0xffFFFFFF), // status bar color
+  ));
     Uri uri = Uri.parse(widget.file);
     String typeString = uri.path.substring(uri.path.length - 3).toLowerCase();
     return Container(

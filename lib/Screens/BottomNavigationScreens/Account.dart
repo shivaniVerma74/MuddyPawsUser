@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:muddypawsuser/Api.path.dart';
@@ -18,6 +19,7 @@ import '../../Custom/CustomCard.dart';
 import '../../Models/GetCategoryModel.dart';
 import '../ContactUs.dart';
 import '../FaqScreen.dart';
+import '../FindPets.dart';
 import '../MyProfile.dart';
 import '../PetsHistory.dart';
 import '../PetsProfile.dart';
@@ -52,6 +54,7 @@ class _AccountState extends State<Account> {
     setState(() {
       isloading = true;
     });
+
     Future.delayed(Duration(seconds: 3),() {
       setState(() {
         isloading = false;
@@ -74,8 +77,10 @@ class _AccountState extends State<Account> {
    print("user id in get user data ${request.fields}");
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
+
     if (response.statusCode == 200) {
       var finalResponse = await response.stream.bytesToString();
+      print('user data===============${finalResponse}');
       final finalResult = GetUserDataModel.fromJson(json.decode(finalResponse));
       print("final respoenseee ${finalResult}");
       print("final&&&&&&&&&&&&& ${finalResponse}");
@@ -94,12 +99,18 @@ class _AccountState extends State<Account> {
 
   @override
   Widget build(BuildContext context) {
+     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xffFFFFFF), // navigation bar color
+    statusBarColor: Color(0xffFFFFFF), // status bar color
+  ));
     return SafeArea(
       child: Container(
         height: MediaQuery.of(context).size.height,
         color: Color(0xfff5f6fb),
         child: Center(
-          child: Column(
+          child:
+          // getUserDataModel?.data==null||getUserDataModel?.data==""?CircularProgressIndicator():
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
@@ -111,12 +122,21 @@ class _AccountState extends State<Account> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Center(
-                            child: Text(
-                              "Account",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold, fontFamily: "Montserrat"),
-                            ),
+                          Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => FindPetStuff()));
+                                },
+                                child: const Icon(Icons.arrow_back_ios),
+                              ),
+                              const SizedBox(width: 110),
+                              const Text(
+                                "Account",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold, fontFamily: "Montserrat"),
+                              ),
+                            ],
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height/29,
@@ -149,8 +169,17 @@ class _AccountState extends State<Account> {
                                   SizedBox(
                                     height: MediaQuery.of(context).size.height/190,
                                   ),
+                                  getUserDataModel?.data?[0].username==null||getUserDataModel?.data?[0].username=='null'?
+                                  Text(
+                                    "",
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold, fontFamily: "Montserrat"
+                                    ),
+                                  ):
                                   Text(
                                     "${getUserDataModel?.data?[0].username}",
+
                                     style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold, fontFamily: "Montserrat"
@@ -159,7 +188,13 @@ class _AccountState extends State<Account> {
                                   SizedBox(
                                     height: MediaQuery.of(context).size.height/190,
                                   ),
+                                  getUserDataModel?.data?[0].email==null||getUserDataModel?.data?[0].email=='null'?
                                   Text(
+                                    "",
+                                    style: const TextStyle(
+                                        fontSize: 16,color: Colors.grey, fontFamily: "Montserrat"
+                                    ),
+                                  ): Text(
                                     "${getUserDataModel?.data?[0].email}",
                                     style: const TextStyle(
                                         fontSize: 16,color: Colors.grey, fontFamily: "Montserrat"
@@ -168,7 +203,9 @@ class _AccountState extends State<Account> {
                                   SizedBox(
                                     height: MediaQuery.of(context).size.height/40,
                                   ),
-                                  Text("${getUserDataModel?.data?[0].mobile}",style: TextStyle(fontSize: 16,color: Colors.grey, fontFamily: "Montserrat"),),
+                                  getUserDataModel?.data?[0].mobile==null||getUserDataModel?.data?[0].mobile=='null'?
+                                  Text("",style: TextStyle(fontSize: 16,color: Colors.grey, fontFamily: "Montserrat"),)
+                                  :Text("${getUserDataModel?.data?[0].mobile}",style: TextStyle(fontSize: 16,color: Colors.grey, fontFamily: "Montserrat"),),
                                 ],
                               ),
                             ],

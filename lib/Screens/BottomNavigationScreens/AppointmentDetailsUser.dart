@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppointmentScreen extends StatefulWidget {
   const AppointmentScreen({Key? key}) : super(key: key);
@@ -12,6 +13,10 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   @override
   int index1=0;int index2=0;
   Widget build(BuildContext context) {
+     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xffFFFFFF), // navigation bar color
+    statusBarColor: Color(0xffFFFFFF), // status bar color
+  ));
     return Scaffold(
       appBar: AppBar(
         title: Text("Appointment Details",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17),),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -74,6 +75,10 @@ class _PetsDetailsState extends State<PetsDetails> {
 
   @override
   Widget build(BuildContext context) {
+     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xffFFFFFF), // navigation bar color
+    statusBarColor: Color(0xffFFFFFF), // status bar color
+  ));
     return Scaffold(
         appBar: AppBar(
           elevation: 0,

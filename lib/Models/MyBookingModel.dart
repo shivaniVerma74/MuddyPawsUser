@@ -91,7 +91,8 @@ class Data {
       dynamic prescriptionDescription, 
       String? doctorName, 
       String? doctorMobile, 
-      String? petType, 
+      String? petType,
+      String? serviceType,
       String? petName,}){
     _id = id;
     _userId = userId;
@@ -111,6 +112,7 @@ class Data {
     _prescription = prescription;
     _prescriptionDescription = prescriptionDescription;
     _doctorName = doctorName;
+    serviceType = serviceType;
     _doctorMobile = doctorMobile;
     _petType = petType;
     _petName = petName;
@@ -136,6 +138,7 @@ class Data {
     _prescriptionDescription = json['prescription_description'];
     _doctorName = json['doctor_name'];
     _doctorMobile = json['doctor_mobile'];
+    serviceType = json['service_type'];
     _petType = json['pet_type'];
     _petName = json['pet_name'];
   }
@@ -157,6 +160,7 @@ class Data {
   dynamic _prescription;
   dynamic _prescriptionDescription;
   String? _doctorName;
+  String? serviceType;
   String? _doctorMobile;
   String? _petType;
   String? _petName;
@@ -175,6 +179,7 @@ Data copyWith({  String? id,
   String? image,
   String? transactionId,
   String? paymentType,
+  String? serviceType,
   dynamic prescription,
   dynamic prescriptionDescription,
   String? doctorName,

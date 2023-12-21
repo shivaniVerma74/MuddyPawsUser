@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:muddypawsuser/Api.path.dart';
@@ -65,10 +66,10 @@ class _PetCareState extends State<PetCare> {
     String? userId = preferences.getString('user_id');
     var request = http.MultipartRequest('POST', Uri.parse(ApiServicves.createProfile));
     request.fields.addAll({
-      'user_id': '${userId}',
-      'pet_type': "${dropdownvalue}",
-      'username': '${petNameCtr.text}',
-      'age': '${ageCtr.text}',
+      'user_id': '$userId',
+      'pet_type': dropdownvalue,
+      'username': petNameCtr.text,
+      'age': ageCtr.text,
       // 'id': '7'
     });
 
@@ -76,8 +77,10 @@ class _PetCareState extends State<PetCare> {
     request.files.add(await http.MultipartFile.fromPath('image', imageFile!.path.toString()));
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
-      var finalResponse = await response.stream.bytesToString();
-      final jsonresponse = json.decode(finalResponse);
+      print("hjjjjjjjjjjjj");
+      var Response = await response.stream.bytesToString();
+      var finalResult = jsonDecode(Response);
+      print("respinseee $finalResult");
       Navigator.push(context, MaterialPageRoute(builder: (context) =>  const FindPetStuff()));
     }
     else {
@@ -94,6 +97,10 @@ class _PetCareState extends State<PetCare> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xffFFFFFF), // navigation bar color
+    statusBarColor: Color(0xffFFFFFF), // status bar color
+  ));
     return Material(
       child: Padding(
         padding: const EdgeInsets.only(top: 30),

@@ -36,7 +36,6 @@ class _VerifyScreenState extends State<VerifyScreen> {
     print("otp iss ${widget.OTP}");
   }
 
-
   // verifyOtp() async {
   //   SharedPreferences preferences = await SharedPreferences.getInstance();
   //   var headers = {
@@ -87,9 +86,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
   //     }
   // }
 
-
-
   verifyOtp() async {
+    String? user_id;
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var headers = {
       'Cookie': 'ci_session=64ad8ba0caf5389a6543a8aef4b3241e6dd75f57'
@@ -105,9 +103,14 @@ class _VerifyScreenState extends State<VerifyScreen> {
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       var finalResponse = await response.stream.bytesToString();
+      print('=======================${finalResponse}');
+
       final jsonresponse = json.decode(finalResponse);
+      print('=======================${jsonresponse['error']}');
       if (jsonresponse['error'] == false) {
-        String? user_id = jsonresponse['data'][0]['id'];
+        setState(() {
+          user_id = jsonresponse['data'][0]['id'];
+        });
         preferences.setString("user_id", user_id ?? "");
         user_name = jsonresponse['data'][0]['username'];
         user_mobile = jsonresponse['data'][0]['mobile'];
@@ -116,12 +119,15 @@ class _VerifyScreenState extends State<VerifyScreen> {
         print("userr nameee iss ${user_mobile}");
         print("userr nameee iss ${user_name}");
         print("Userrrr Id Is ${user_id.toString()}");
-        Fluttertoast.showToast(msg: '${jsonresponse['message']}');
+        Fluttertoast.showToast(msg: 'OTP Verified');
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const FindPetStuff()));
       }
       else {
-        Fluttertoast.showToast(msg: "${jsonresponse['message']}");
+
+        Fluttertoast.showToast(msg: jsonresponse['message']);
+
+        // Fluttertoast.showToast(msg: "${jsonresponse['message']}");
       }
       // if(widget.OTP == verifie){
       //   Fluttertoast.showToast(msg: '${jsonresponse['message']}');
@@ -141,7 +147,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return
+
+      Scaffold(
       backgroundColor: colors.white,
       appBar: AppBar(
         elevation: 0,
@@ -178,6 +186,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 ),
               ),
               Text("OTP: ${widget.OTP}"),
+
               OtpTextField(
                 numberOfFields: 4,
                 borderColor: Colors.red,
@@ -193,7 +202,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     if(widget.OTP.toString() == pinController.text){
                       // Fluttertoast.showToast(msg: "Otp  is match ",backgroundColor: colors.primary);
                     }else{
-                      Fluttertoast.showToast(msg: "Otp Incorrect ",backgroundColor: colors.primary);
+                      // Fluttertoast.showToast(msg: "Otp Incorrect ",backgroundColor: colors.primary);
                     }
                   }
               ),
@@ -204,6 +213,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, fontFamily: "Montserrat"),
                 ),
               ),
+
               InkWell(
                 onTap: () {
                   // postData(context);
@@ -211,6 +221,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 child: const Text("Resend",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, fontFamily: "Montserrat")),
               ),
+
               Padding(
                 padding: const EdgeInsets.only(
                   top: 48,

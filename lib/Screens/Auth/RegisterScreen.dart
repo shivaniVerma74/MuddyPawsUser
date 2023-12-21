@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:muddypawsuser/Api.path.dart';
 import 'package:muddypawsuser/Screens/Auth/VerifyOtp.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../Colors.dart';
 import '../../Custom/CustomButton.dart';
 import '../../Custom/CustomTextFormField.dart';
@@ -60,6 +61,8 @@ class _RegisterState extends State<Register> {
   }
 
   userRegister() async {
+    String? user_id;
+    SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       isLoading == true;
     });
@@ -78,8 +81,16 @@ class _RegisterState extends State<Register> {
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       var result = await response.stream.bytesToString();
+
+      print('===================${result}');
       var finalResult = jsonDecode(result);
       if(finalResult['error'] == false) {
+
+        setState(() {
+          user_id = finalResult['data'][0]['id'];
+        });
+        preferences.setString("user_id", user_id ?? "");
+
         int? otp = finalResult['otp'];
         String? mobile = finalResult['data'][0]['mobile'];
         print("otp is regisetr ${otp}");
@@ -192,10 +203,12 @@ class _RegisterState extends State<Register> {
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),),
                     child: Center(
                       child: TextFormField(
+                        maxLength: 10,
                         keyboardType: TextInputType.number,
                         controller: mobileCtr,
                         // enabled: false,
                         decoration: const InputDecoration(
+                          counterText: "",
                           border: InputBorder.none,
                           prefixIcon: Icon(Icons.call),
                           // fillColor: Color(0x25888888),

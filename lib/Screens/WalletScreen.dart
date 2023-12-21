@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:muddypawsuser/Api.path.dart';
 import 'package:muddypawsuser/Custom/CustomCard.dart';
@@ -84,8 +85,8 @@ class _WalletScreenState extends State<WalletScreen> {
     };
     var request = http.MultipartRequest('POST', Uri.parse(ApiServicves.addWallet));
     request.fields.addAll({
-      'user_id': '${userId}',
-      'amount': '${amtC.text}'
+      'user_id': '$userId',
+      'amount': amtC.text
     });
 
     request.headers.addAll(headers);
@@ -330,26 +331,15 @@ class _WalletScreenState extends State<WalletScreen> {
           ],
         ),
       ),
-      //     // walletTransactions[index].paymentAddress != null &&
-      //     //     walletTransactions[index].paymentAddress!.isNotEmpty
-      //     //     ? Text(getTranslated(context, "PaymentAddress")! +
-      //     //         " : " +
-      //     //         tranList[index].paymentAddress! +
-      //     //         ".")
-      //     //     : Container(),
-      //     // tranList[index].paymentType != null &&
-      //     //         tranList[index].paymentType!.isNotEmpty
-      //     //     ? Text(getTranslated(context, "PaymentType")! +
-      //     //         " : " +
-      //     //         tranList[index].paymentType!)
-      //     //     : Container(),
-      //   ],
-      // ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xffFFFFFF), // navigation bar color
+    statusBarColor: Color(0xffFFFFFF), // status bar color
+  ));
     return Scaffold(
       backgroundColor:  Color(0xfff5f6fb),
         body: SingleChildScrollView(

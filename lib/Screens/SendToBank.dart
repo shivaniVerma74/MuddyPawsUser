@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'BottomNavigationScreens/AppointmentDetailsUser.dart';
 
@@ -20,6 +21,10 @@ class _SendToBankPageState extends State<SendToBankPage> {
 
   @override
   Widget build(BuildContext context) {
+     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xffFFFFFF), // navigation bar color
+    statusBarColor: Color(0xffFFFFFF), // status bar color
+  ));
     return Scaffold(
       appBar: AppBar(
         leading: Icon(

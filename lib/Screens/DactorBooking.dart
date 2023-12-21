@@ -39,6 +39,7 @@ class _DactorBookingState extends State<DactorBooking> {
     print("pet name hererer ${widget.petTypee}");
     print("pet type hererer ${widget.pettName}");
     print("pet idd hererer ${widget.petIdd}");
+    print("fees hererer ${widget.fees}");
     userName();
     userMobile();
     petName();
@@ -275,7 +276,7 @@ class _DactorBookingState extends State<DactorBooking> {
     };
     var request = http.MultipartRequest('POST', Uri.parse(ApiServicves.getTimeSlot));
     request.fields.addAll({
-      'user_id': '$userId',
+      'user_id': '${widget.id}',
       'date': startDateController.text
     });
     print("get time slot paarar ${request.fields}");
@@ -347,6 +348,7 @@ class _DactorBookingState extends State<DactorBooking> {
     final String formatted = serverFormater.format(displayDate);
     return formatted;
   }
+
   Future _selectDateStart() async {
     DateTime? picked = await showDatePicker(
         context: context,
@@ -405,7 +407,6 @@ class _DactorBookingState extends State<DactorBooking> {
     'Cat',
   ];
 
-
   Future<void> _handlePaymentSuccess(PaymentSuccessResponse response) async {
     Fluttertoast.showToast(msg: "Payment successfully");
     bookAppoinmtment();
@@ -425,7 +426,7 @@ class _DactorBookingState extends State<DactorBooking> {
     double res = double.parse(amount.toString());
     pricerazorpayy= int.parse(res.toStringAsFixed(0)) * 100;
     print("checking razorpay price ${pricerazorpayy.toString()}");
-    print("aaaaaaaaaaaaaa${amount}");
+    print("aaaaaaaaaaaaaa $amount");
     // Navigator.of(context).pop();
     var options = {
       'key': 'rzp_test_1DP5mmOlF5G5ag',
@@ -441,8 +442,9 @@ class _DactorBookingState extends State<DactorBooking> {
     }
   }
 
-File? petsImage;
+  File? petsImage;
   File? userImage;
+
   Future<void> pickImage(ImageSource source, String type) async {
     final pickedFile = await ImagePicker().pickImage(
       source: source,
@@ -472,14 +474,14 @@ File? petsImage;
             color: Colors.transparent, //could change this to Color(0xFF737373),
             //so you don't have to change MaterialApp canvasColor
             child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius:  BorderRadius.only(
-                        topLeft: const Radius.circular(10.0),
-                        topRight: const Radius.circular(10.0))),
+                        topLeft: Radius.circular(10.0),
+                        topRight: Radius.circular(10.0))),
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Container(
@@ -489,17 +491,17 @@ File? petsImage;
                           borderRadius: BorderRadius.circular(75),
                           color: Colors.grey),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
-                    Text(
+                    const Text(
                       'Select Any One Option',
                       style: TextStyle(
                           fontSize: 17,
                           color: Colors.black,
                           fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     InkWell(
@@ -516,11 +518,11 @@ File? petsImage;
                           height: 50,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8)),
-                          child: Center(child: Text('Select From Gallery')),
+                          child: const Center(child: Text('Select From Gallery')),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     InkWell(
@@ -536,7 +538,7 @@ File? petsImage;
                           height: 50,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8)),
-                          child: Center(child: Text('Select From Camera')),
+                          child: const Center(child: Text('Select From Camera')),
                         ),
                       ),
                     )
@@ -957,20 +959,20 @@ File? petsImage;
                           showAlertDialog(context, "petsImage");
                         },
                         child: const Text("Upload Pet's Image", style: TextStyle(fontSize: 15, fontFamily: "Montserrat"),)),
-                    SizedBox(height: 10,),
-                    petsImage == null ? SizedBox.shrink() :  InkWell(
+                    const SizedBox(height: 10),
+                    petsImage == null ? const SizedBox.shrink() :  InkWell(
                       onTap: () {
                         showAlertDialog(context, "petsImage");
                       },
                       child: Container(
                         height: 100,
                         width: double.infinity,
-                        margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                        margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                         child: Image.file(petsImage!,fit: BoxFit.fill,),
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * .02,
+                      height: MediaQuery.of(context).size.height*.02,
                     ),
                   ],
                 ),

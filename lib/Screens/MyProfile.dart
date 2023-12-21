@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart'as http;
 import 'package:image_picker/image_picker.dart';
@@ -122,9 +123,15 @@ class _MyProfileState extends State<MyProfile> {
   @override
 
   Widget build(BuildContext context) {
+     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xffFFFFFF), // navigation bar color
+    statusBarColor: Color(0xffFFFFFF), // status bar color
+  ));
     return Scaffold(
 
-      body:isloading?Center(child: CircularProgressIndicator()): SingleChildScrollView(
+      body:
+
+      isloading?Center(child: CircularProgressIndicator()): SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
           color: Color(0xfff5f6fb),
@@ -228,6 +235,8 @@ class _MyProfileState extends State<MyProfile> {
                       key: _formKey,
                       child: Column(
                         children: [
+
+
                           Card(
                             elevation: 3,
                             child: Container(
@@ -252,6 +261,8 @@ class _MyProfileState extends State<MyProfile> {
                               ),
                             ),
                           ),
+
+
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 60,
                           ),
@@ -355,7 +366,7 @@ class _MyProfileState extends State<MyProfile> {
       'mobile': phonecn.text,
       'user_id': userId.toString(),
     });
-    request.files.add(await http.MultipartFile.fromPath('image', _imageFile?.path ?? "",));
+    // request.files.add(await http.MultipartFile.fromPath('image', _imageFile?.path ?? "",));
 //  print('///////////////${request.files}');
 //  print('///////////////${request.fields}');
     request.headers.addAll(headers);
@@ -374,7 +385,7 @@ class _MyProfileState extends State<MyProfile> {
         await Navigator.push(context, MaterialPageRoute(builder: (context) =>
             Account(Name:name,Mobile:mobile,Email:email,imagepath:image),));
       }
-      else{
+      else {
         Fluttertoast.showToast(msg: "${finalresult['message']}",);
       }
     }

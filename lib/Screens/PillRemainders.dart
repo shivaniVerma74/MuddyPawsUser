@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../Custom/CustomCard.dart';
 import 'SavedAddress.dart';
@@ -14,6 +15,10 @@ class PillRemainders extends StatefulWidget {
 class _PillRemaindersState extends State<PillRemainders> {
   @override
   Widget build(BuildContext context) {
+     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xffFFFFFF), // navigation bar color
+    statusBarColor: Color(0xffFFFFFF), // status bar color
+  ));
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(

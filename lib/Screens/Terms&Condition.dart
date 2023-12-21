@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:muddypawsuser/Api.path.dart';
 import 'package:http/http.dart' as http;
@@ -54,6 +55,10 @@ class _TermsState extends State<Terms> {
 
   @override
   Widget build(BuildContext context) {
+     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xffFFFFFF), // navigation bar color
+    statusBarColor: Color(0xffFFFFFF), // status bar color
+  ));
     return RefreshIndicator(
       onRefresh: _refresh,
       child: Scaffold(

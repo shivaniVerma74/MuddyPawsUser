@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:muddypawsuser/Api.path.dart';
 import '../Colors.dart';
@@ -47,6 +48,10 @@ class _FaqScreenState extends State<FaqScreen> {
   }
   @override
   Widget build(BuildContext context) {
+     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xffFFFFFF), // navigation bar color
+    statusBarColor: Color(0xffFFFFFF), // status bar color
+  ));
     return Scaffold(
       backgroundColor: Color(0xfff5f6fb),
       appBar: AppBar(

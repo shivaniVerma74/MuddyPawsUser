@@ -74,6 +74,8 @@ class _LoginState extends State<Login> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+
+
               SizedBox(
                 height: MediaQuery.of(context).size.height / 12,
               ),
@@ -100,6 +102,7 @@ class _LoginState extends State<Login> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 39,
               ),
+
               Card(
                 elevation: 3,
                 child: Container(
@@ -107,9 +110,11 @@ class _LoginState extends State<Login> {
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),),
                   child: Center(
                     child: TextFormField(
+                      maxLength: 10,
                       keyboardType: TextInputType.number,
                       controller: mobileController,
                       decoration: const InputDecoration(
+                        counterText: "",
                         border: InputBorder.none,
                         prefixIcon: Icon(Icons.call),
                         hintText: "Mobile",
@@ -123,6 +128,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
+
               SizedBox(
                 height: MediaQuery.of(context).size.height/69,
               ),
@@ -207,7 +213,7 @@ class _LoginState extends State<Login> {
               // SizedBox(
               //   height: MediaQuery.of(context).size.height / 39,
               // ),
-              SizedBox(height: 10,),
+              SizedBox(height: 10),
               TextButton(
                   onPressed: () {
                     Navigator.pushNamed(context, "register");

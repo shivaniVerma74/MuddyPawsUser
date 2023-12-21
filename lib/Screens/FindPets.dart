@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'BottomNavigationScreens/AppointmentDetailsUser.dart';
 import 'BottomNavigationScreens/Account.dart';
@@ -28,6 +29,10 @@ class _FindPetStuffState extends State<FindPetStuff> {
 
   @override
   Widget build(BuildContext context) {
+     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xffFFFFFF), // navigation bar color
+    statusBarColor: Color(0xffFFFFFF), // status bar color
+  ));
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(child: _pages[_currentIndex]),

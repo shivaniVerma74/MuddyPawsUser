@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../Custom/CustomButton.dart';
 import '../Custom/CustomTextFormField.dart';
@@ -13,6 +14,10 @@ class Support extends StatefulWidget {
 class _SupportState extends State<Support> {
   @override
   Widget build(BuildContext context) {
+     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xffFFFFFF), // navigation bar color
+    statusBarColor: Color(0xffFFFFFF), // status bar color
+  ));
     return Scaffold(
       backgroundColor: Color(0xfff5f6fb),
       body: SingleChildScrollView(
